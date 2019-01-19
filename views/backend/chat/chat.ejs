@@ -1,0 +1,245 @@
+<%-  include('../header_single.ejs') %>
+
+<div class="borderPage" id="chat">
+	<!--@left-->
+	<div class="leftCol">
+		<div class="leftColin" id="tab">
+			<div class="leftColTop">
+				<div class="title">房間用戶列表</div>
+				<div class="tabBox">
+					<ul class="tabHolder">
+						<li class="tabsec selected">在线访客</li>
+						<li class="tabsec">客服人员</li>
+					</ul>
+				</div>
+			</div>
+			<div class="leftBody gpt80">
+				<div class="tabPanel">
+					<div id="customcount"></div>
+					<ul id="customlist"></ul>
+				</div>
+				<div class="tabPanel">
+					<div id="staffcount"></div>
+					<ul id="stafflist"></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--\\left-->
+	<div class="midCol">
+		<div class="leftColTop">
+			<div class="title">
+				<div class="thL"><b><%= room %>在线咨询</b></div>
+				<div class="thR">
+					<a href="/adm_chatout" class="button ga" id="adm_chatout"><span>退出聊天室</span></a>
+				</div>
+			</div>
+		</div>
+		<div class="leftBody gpb">
+			<ul class="chats" id="msgUL"></ul>
+		</div>
+		<div class="chatcom">
+			<form id="chatFm" class="chatFm">
+				<ul class="fmUL">
+					<li class="b" id="cinputli">
+						
+						<div class="control">
+							<textarea id="cinput" class="textarea validate" rows="4" name="cinput" data-valid="elemt:'#cinput',rule:'range',warn:_ZUI_This is a required field._ZUI_,range:'1,300',pass:'&nbsp;',passhide:1,tar:'#cinputli'" placeholder="请输入聊天内容"></textarea>
+						</div>
+					</li>
+					<li class="b">
+						<button type="button" class="button re" title="提 交" name="csend" id="csend">
+		                    <span>提 交</span>
+		                </button>
+					</li>
+				</ul>
+				
+			</form>
+		</div>
+	</div>
+
+	<div class="gapCol"></div>
+	<!--@right-->
+	<div class="rightCol">
+		11
+	</div>
+	<!--\\right-->
+</div>
+
+
+<script type="text/javascript">
+	require(['jquery','socket','lovevox_core','lovevox_ui','lovevox_common'],function($,io){
+		(function($) {
+			var socket = io.connect();//初始化socket 对象
+			var tab = new ZUI.Tab('#tab',{
+				tabSelector: 'tabsec',
+				contentSelector: 'tabPanel',
+				activeClass: 'selected',
+				onShow:function(sec,pan,inx){
+					//console.log('触发选项卡'+inx+'的事件.')
+				}
+			});
+
+			var usermail = "<%= user %>",
+				nickname = "<%= name %>",
+				sid = "<%= sid %>",
+				msgUL = $('#msgUL');
+
+			var chatValid = new ZUI.Validator("chatFm",{
+				ruleTag:'.validate',
+				tagClass:'Vmsg',
+				passClass:'',
+				Qmode:false,
+				autoSbmit:false,
+				keybord:true,
+				submitBtn:'#csend',
+				onSubmit: function(fm,err,btn){
+					
+					if(err>0){
+					
+					}else{
+						var content = cinput.val();
+						if(/^@[A-Za-z0-9 ._-]*\:/.test(content)){
+							var touser = content.match(/^@[A-Za-z0-9 ._-]*\:/)[0];
+							var tousername = touser.replace('@','').replace(':','');
+							var content1 = content.replace(touser,'');
+
+							socket.emit("say_private",nickname,tousername,content1);    //私聊
+						}else{
+							socket.emit("say",content);//公开聊天
+						}
+						cinput.val('');
+					}
+				}
+			}),cinput = $('#cinput');
+
+			//进入聊天室发送用户基本信息回服务器
+			socket.on('connect',function(){
+				socket.send(usermail,nickname,sid);         // 向服务器发送自己的昵称
+				console.log("send userName to server completed");
+        	});
+
+			//服务端广播新用户上线
+        	socket.on("userIn",function(data){ 
+				msgUL.append('<li class="system">Uer '+data.name+' is online.</li>');
+			});
+        	//服务端广播新用户下线
+         	socket.on("userOut",function(data){ 
+
+				msgUL.append('<li class="system">User '+data.name+' is offline.</li>');
+			});
+         	// 获取用户列表并(自己/广播)展示
+         	var stafflistBox = $("#stafflist"),staffcount = $("#staffcount"), customlistBox= $("#customlist"), customcount= $("#customcount");
+         	socket.on("staff_list",function(staffList,staffOnline,customList,customOline){
+
+				stafflistBox.empty();
+				var str ='';
+				for(var i=0;i<staffList.length;i++){
+					if(staffList[i] != null){  
+						str+='<li class="clear"><div class="fright">'+staffList[i].status+'</div><span class="name">'+staffList[i].name+'</span></li>';
+					}
+					//if(userList[i].status == 'up')online++;
+				}
+				stafflistBox.append(str);
+				staffcount.html("当前在线：" + staffOnline + "人");
+
+
+				customlistBox.empty();
+				var str2 ='';
+				for(var i=0;i<customList.length;i++){
+					if(customList[i] != null){  
+						str2+='<li class="clear"><div class="fright">'+customList[i].status+'</div><span class="name">'+customList[i].name+'</span></li>';
+					}
+					//if(userList[i].status == 'up')online++;
+				}
+				customlistBox.append(str2);
+				customcount.html("当前在线：" + customOline + "人");
+
+			});
+
+			socket.on("user_say",function(name,email,time,content){    // 获取用户的聊天信息并显示于面板
+				//console.log("client:  "+name + "say :  "+content+'-'+time);
+				var chatsty = (email == usermail) ? 'me' : 'other';
+				var str = '';
+				    str += '<li class="'+chatsty+'"><em class="chat_arr"></em>';
+	                str += '<span class="chatAvatar"><img src="/images/user.jpg"/></span>';
+	                str += '<div class="chat_cont"><div class="chat_meta">';
+		            str += '<span class="blue name">'+name+'</span>';
+		            str += '<div class="gray">'+time+'</div></div>';
+		            str += '<div class="chat_txt">'+content+'</div></div></li>';
+				msgUL.append(str);
+			});
+
+			//别人给我发消息
+			socket.on("sayToYou",function(fromuser,content,time){
+				var str = '';
+				    str += '<li class="other"><em class="chat_arr"></em>';
+	                str += '<span class="chatAvatar"><img src="/images/user.jpg"/></span>';
+	                str += '<div class="chat_cont"><div class="chat_meta">';
+		            str += '<div>[<span class="blue name">'+fromuser+'</span>]给我发私信</div>';
+		            str += '<div class="gray">'+time+'</div></div>';
+		            str += '<div class="chat_txt">'+content+'</div></div></li>';
+		        msgUL.append(str);
+		        
+			});
+			//给别人发私信成功
+			socket.on("say_private_done",function(touser,content,time){
+				var str = '';
+				    str += '<li class="me"><em class="chat_arr"></em>';
+	                str += '<span class="chatAvatar"><img src="/images/user.jpg"/></span>';
+	                str += '<div class="chat_cont"><div class="chat_meta">';
+		            str += '<div>你已经给[<span class="blue">'+touser+'</span>]发送了私信</div>';
+		            str += '<div class="gray">'+time+'</div></div>';
+		            str += '<div class="chat_txt">'+content+'</div></div></li>'; 
+				msgUL.append(str);	
+			});
+			//登录超时
+        	socket.on("logout",function(){ 
+				console.log('登录超时?');
+			});
+			//处理异常
+			socket.on("erro",function(data){ 
+				msgUL.append('<li class="system">'+data+'</li>');
+			});
+
+        	$(document).ready(function() {
+     			$('#chat').on('click','.name',function(){
+ 					var staffname = $(this).text(),atStaff = '@'+staffname+':',cinput =$('#cinput'),v = cinput.val();
+					cinput.val(/^@[A-Za-z0-9 ._-]*\:/.test(v) ? v.replace(/^@[A-Za-z0-9 ._-]*\:/,atStaff) : atStaff+v);
+     			});
+
+     			$('#adm_chatout').on('click',function(e){
+     				e.preventDefault();
+     				var btn = $(this),uri = btn.attr('href');
+     				btn.addClass('wait').prop('disabled',true);
+					$.ajax({
+						type: "POST",
+						url: uri,
+						dataType:'json',
+						data: {"site":"<%= room %>","umail":"<%= user %>","uname":"<%= name %>"}
+					})
+					.done(function(data) {
+						if(data.status=="ok"){
+							window.opener=null;
+							window.open('','_self');
+							window.close();
+						}else{
+							myBox.alert(data.message,{
+								boxtitle:'系统提示',
+								textBoxBtnOk: '确 定', 
+								callback:function(){
+									
+								}
+							});
+						};
+					})
+					.always(function(){
+						btn.removeClass('wait').removeProp('disabled');
+					});
+     			});
+
+            });
+		})(jQuery);
+	});
+</script>
+<%-  include('../footer_single.ejs') %>

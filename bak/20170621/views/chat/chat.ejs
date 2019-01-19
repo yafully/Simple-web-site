@@ -1,0 +1,195 @@
+<% include header.ejs %>
+
+<div id="chat" class="chatBox">
+
+	<div class="contact">
+		<h2>在线客服</h2>
+
+		<div class="chatroom">
+			<div class="userBox">
+				<ul id="userlist"></ul>
+				<div id="usercount"></div>
+			</div>
+			<!--@消息区-->
+			<div class="msgBox">
+				<ul class="chats" id="msgUL">
+
+				</ul>
+			</div>
+			<!--\\消息区-->
+			<form id="chatFm" class="chatFm">
+				<ul class="fmUL">
+					<li class="b" id="cinputli">
+						
+						<div class="control">
+							<textarea id="cinput" class="textarea validate" rows="4" name="cinput" data-valid="elemt:'#cinput',rule:'range',warn:_ZUI_This is a required field._ZUI_,range:'1,300',pass:'&nbsp;',passhide:1,tar:'#cinputli'" placeholder="请输入聊天内容"></textarea>
+						</div>
+					</li>
+					<li class="b">
+						<button type="button" class="button re" title="提 交" name="csend" id="csend">
+		                    <span>提 交</span>
+		                </button>
+					</li>
+				</ul>
+				<input id="chatuser" class="input" type="text" name="chatuser" value="<%= user %>"/>
+				<input id="chatname" class="input" type="text" name="chatname" value="<%= name %>"/>
+			</form>
+		</div>
+
+		<a href="/chatlogout?site=<%= room %>&email=<%= user %>&user=<%= name %>" rel="nofollow" id="outchat">退出</a>
+
+	</div>	
+</div>
+<script type="text/javascript">
+	require(['jquery','socket','lovevox_core','lovevox_ui'], function ($,io){
+         (function($) {
+         	var socket = io.connect();//初始化socket 对象
+         	var usermail = $("#chatuser").val(),nickname = $("#chatname").val(),msgUL = $('#msgUL');
+
+			var chatValid = new ZUI.Validator("chatFm",{
+				ruleTag:'.validate',
+				tagClass:'Vmsg',
+				passClass:'',
+				Qmode:false,
+				autoSbmit:false,
+				keybord:true,
+				submitBtn:'#csend',
+				onSubmit: function(fm,err,btn){
+					
+					if(err>0){
+					
+					}else{
+						var content = cinput.val();
+						if(/^@[A-Za-z0-9 ._-]*\:/.test(content)){
+							var touser = content.match(/^@[A-Za-z0-9 ._-]*\:/)[0];
+							var tousername = touser.replace('@','').replace(':','');
+							var content1 = content.replace(touser,'');
+
+							socket.emit("say_private",nickname,tousername,content1);    //私聊
+						}else{
+							socket.emit("say",content);//公开聊天
+						}
+						cinput.val('');
+					}
+				}
+			}),cinput = $('#cinput');
+
+			//进入聊天室发送用户基本信息回服务器
+			socket.on('connect',function(){
+				socket.send(usermail,nickname);         // 向服务器发送自己的昵称
+				console.log("send userName to server completed");
+        	});
+
+			//服务端广播新用户上线
+        	socket.on("userIn",function(data){ 
+				msgUL.append('<li class="system">Uer '+data.name+' is online.</li>');
+			});
+        	//服务端广播新用户下线
+         	socket.on("userOut",function(data){ 
+         		if(data.email == usermail){//当退出用户的email为当前客户端email时则回到登录
+         			location.href = '/chatlogout?site=<%= room %>&email=<%= user %>&user=<%= name %>';
+
+         		};
+				msgUL.append('<li class="system">User '+data.name+' is offline.</li>');
+			});
+         	// 获取用户列表并(自己/广播)展示
+         	var userlistBox = $("#userlist"),usercount = $("#usercount");
+         	socket.on("staff_list",function(userList,numOnline){
+
+				userlistBox.empty();
+				var str ='';
+					
+				for(var i=0;i<userList.length;i++){
+					if(userList[i] != null){  
+						str+='<li class="clear"><div class="fright">'+userList[i].status+'</div><span class="name">'+userList[i].name+'</span></li>';
+					}
+					//if(userList[i].status == 'up')online++;
+				}
+				userlistBox.append(str);
+				usercount.html("当前在线：" + numOnline + "人");
+			});
+
+			socket.on("user_say",function(name,email,time,content){    // 获取用户的聊天信息并显示于面板
+				//console.log("client:  "+name + "say :  "+content+'-'+time);
+				var chatsty = (email == usermail) ? 'me' : 'other';
+				var str = '';
+				    str += '<li class="'+chatsty+'"><em class="chat_arr"></em>';
+	                str += '<span class="chatAvatar"><img src="/images/user.jpg"/></span>';
+	                str += '<div class="chat_cont"><div class="chat_meta">';
+		            str += '<span class="blue name">'+name+'</span>';
+		            str += '<div class="gray">'+time+'</div></div>';
+		            str += '<div class="chat_txt">'+content+'</div></div></li>';
+				msgUL.append(str);
+			});
+
+			//别人给我发消息
+			socket.on("sayToYou",function(fromuser,content,time){
+				var str = '';
+				    str += '<li class="other"><em class="chat_arr"></em>';
+	                str += '<span class="chatAvatar"><img src="/images/user.jpg"/></span>';
+	                str += '<div class="chat_cont"><div class="chat_meta">';
+		            str += '<div>[<span class="blue name">'+fromuser+'</span>]给我发私信</div>';
+		            str += '<div class="gray">'+time+'</div></div>';
+		            str += '<div class="chat_txt">'+content+'</div></div></li>';
+		        msgUL.append(str);
+		        
+			});
+			//给别人发私信成功
+			socket.on("say_private_done",function(touser,content,time){
+				var str = '';
+				    str += '<li class="me"><em class="chat_arr"></em>';
+	                str += '<span class="chatAvatar"><img src="/images/user.jpg"/></span>';
+	                str += '<div class="chat_cont"><div class="chat_meta">';
+		            str += '<div>你已经给[<span class="blue">'+touser+'</span>]发送了私信</div>';
+		            str += '<div class="gray">'+time+'</div></div>';
+		            str += '<div class="chat_txt">'+content+'</div></div></li>'; 
+				msgUL.append(str);	
+			});
+
+
+			//登录超时
+        	socket.on("logout",function(){ 
+				location.href = '/chatlogin?site=<%= room %>&email=<%= user %>&user=<%= name %>';
+			});
+			//处理异常
+			socket.on("erro",function(data){ 
+				msgUL.append('<li class="system">'+data+'</li>');
+			});
+
+
+        	$(document).ready(function() {
+     //    		$('#outchat').on('click',function(e){
+     //    			e.preventDefault();
+     //    			var uri = $(this).attr('href');
+        			
+     //    			$.ajax({
+					// 	type: "GET",
+					// 	url: uri
+					// })
+					// .done(function(data) {
+					// 	if(data.status=='ok'){
+					// 		$('#chat').removeClass('chating');
+					// 		$('#chatuser').val('');
+					// 	};
+					// })
+					// .always(function(){
+						
+					// });
+     //    		});
+            	
+     			$('#chat').on('click','.name',function(){
+ 					var staffname = $(this).text(),atStaff = '@'+staffname+':',cinput =$('#cinput'),v = cinput.val();
+ 					
+					cinput.val(/^@[A-Za-z0-9 ._-]*\:/.test(v) ? v.replace(/^@[A-Za-z0-9 ._-]*\:/,atStaff) : atStaff+v);
+ 					
+ 					//cinput.val(atStaff+v);
+
+
+
+     			});
+
+             });
+         })(jQuery);
+     });
+</script>
+<% include footer.ejs %>

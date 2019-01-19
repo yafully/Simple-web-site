@@ -1,0 +1,123 @@
+//ProJect:Lovevox company site
+//For:Backed system
+//Author:YafullyZhao
+//Date:2017.05.03
+
+/*--模块依赖--*/
+@import "core";
+//--reset
+.normalize;
+.reset;
+//--栅格
+//.generate-columns(12);
+.articleStyle;
+
+.red,.red:link,.red:visited{color:#c81a1a !important}
+.green,.green:link,.green:visited{color:#68a772}
+.pink,.pink:link,.pink:visited{color:#e96f66}
+.blue,.blue:link,.blue:visited{color:#016481 !important}
+.sky,.sky:link,.sky:visited{color:#4dc1df;}
+.oran,.oran:link,.oran:visited{color:#993d06;}
+.brown,.brown:link,.brown:visited{color:#cfa972}
+.gray,.gray:link,.gray:visited{color:#999}
+.silver,.silver:link,.silver:visited{color:#666}
+.white,.white:link,.white:visited{color:#fff}
+.black,.black:link,.black:visited{color:#333}
+
+
+img.lzy{background:#fff url(../images/loading/spin.gif) no-repeat 50% 50%;}
+
+
+//Icons
+.font-face('icomoon','icomoon','../fonts/');
+
+[data-icon]:before {font-family:'icomoon';content:attr(data-icon);speak:none;font-weight:normal;font-variant: normal;text-transform: none;line-height: 1;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+
+.icon,.icon14,.icon16,.icon20,.icon26,.icon32,.icon36,.icon40,.icon48,.icon64{.vm;white-space:nowrap;.center;}
+.icon14{.iconSize(14px,12px);}
+.icon16{.iconSize;}
+.icon20{.iconSize(20px,20px);position: relative;
+	&.icon_chat:before{top:0;left:0;font-family:'icomoon';.bgicon(20px,18px,'\e91c',#333);}
+}
+.icon24{.iconSize(24px,24px);}
+.icon26{.iconSize(26px,24px);}
+.icon32{.iconSize(32px,30px);}
+.icon36{.iconSize(36px,34px);}
+.icon40{.iconSize(40px,38px);}
+.icon48{.iconSize(48px,46px);}
+.icon64{.iconSize(64px,62px);}
+
+html{font-size:100%;}
+html,body{height:100%;margin: 0;padding: 0;}
+body{font: 13px/1.8  "微软正黑体", "新细明体" ,Arial,Helvetica, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust: 100%;-webkit-overflow-scrolling:touch;-webkit-font-smoothing: antialiased;background:#fff;color:@TxtColor;
+	will-change:scroll-position;
+}
+.ovhide{overflow:hidden}
+.main{height: 100%;.sizeBox;}
+
+/*头部*/
+@import "header";
+/*主体*/
+@import "workspace";
+/*表单*/
+@import "form";
+/*列表*/
+@import "list";
+/*聊天室*/
+@import "chat";
+/*LovevoxUI*/
+@import "lovevoxui";
+/*scrollbar*/
+//@import "scrollbar";
+
+
+
+//Mobile 
+@media screen and (max-width:800px) {
+	html{font-size:75%;}
+	body{overflow-x:hidden;overflow-y:auto;font-size: 1.2rem;-webkit-text-size-adjust:100%;-ms-text-size-adjust: 100%;-webkit-overflow-scrolling:touch;/*-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-font-smoothing: antialiased;*/}
+	.wrap{padding: 0 8px;}
+	.sidebar{width:100%;padding-right:0;.fnone;}
+	.column{width:100%;.fnone;}
+
+	.mhide{display: none !important;}
+	.whide{display: block;}
+
+}
+@media only screen and (device-width: 768px) {//pad
+
+}
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  /* For portrait layouts only 纵向*/
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+  /* For landscape layouts only 横向*/
+}
+
+@media screen and (min-width: 320px) {
+	html{font-size:75%;}
+}
+@media screen and (min-width: 360px) {
+	html{font-size:85%;}
+}
+
+@media screen and (min-width: 560px) {
+	html{font-size:85%;}
+}
+
+@media screen and (min-width: 768px) {
+	html{font-size:75%;}
+}
+
+@media only screen and (-webkit-device-pixel-ratio:.75),
+ only screen and (-webkit-device-pixel-ratio:1),
+ only screen and (-webkit-device-pixel-ratio:1.5),
+ only screen and (-webkit-min-device-pixel-ratio: 2) {
+	/* Put CSS for medium density (mdpi) Android layouts in here */
+	html{font-size:65%;}
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+	html{font-size:75%;}
+}

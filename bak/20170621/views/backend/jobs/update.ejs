@@ -1,0 +1,138 @@
+<%-  include('../header_single.ejs') %>
+
+    <form method="post">
+    <div class="block">
+        <table class="table border">
+             <colgroup>
+                <col style="width:50px"/>
+                <col style="width:120px"/>
+                <col style="width:30%"/>
+                <col style="width:120px"/>
+                <col style="width:160px"/>
+            </colgroup> 
+            <thead>
+              <tr>
+                <th colspan="5">批量修改招聘信息</th>
+              </tr>
+
+            </thead>
+            <tbody>
+              <% for(var i = 0; i < result.length; i++) { %>  
+              <tr>
+                <td rowspan="5" align="center" class="colbg">
+                    <input hidden type="text" name="_id_<%= i %>" value=<%= result[i]._id %>>
+                    <input type="checkbox" class="checkbox" name='pagetotal' value=<%= i %>>
+                </td>
+                <td align="right" class="colbg">职位：</td>
+                <td>
+                    <input type="text" name="job_name_<%= i %>" value="<%= result[i].jobName %>" class="input" style="width:70%"/>
+                </td>
+                <td align="right" class="colbg">部门：</td>
+                <td>
+                    <span class="dropdown">
+                        <select name="depart_<%= i %>" id="depart_<%= i %>">
+                            <option value="技术部" <% if(result[i].depart=='技术部') { %>selected = "selected"<% }%>>技术部</option>
+                            <option value="仓储部" <% if(result[i].depart=='仓储部') { %>selected = "selected"<% }%>>仓储部</option>
+                            <option value="物流部" <% if(result[i].depart=='物流部') { %>selected = "selected"<% }%>>物流部</option>
+                            <option value="采购部" <% if(result[i].depart=='采购部') { %>selected = "selected"<% }%>>采购部</option>
+                            <option value="财务部" <% if(result[i].depart=='财务部') { %>selected = "selected"<% }%>>财务部</option>
+                            <option value="客服部" <% if(result[i].depart=='客服部') { %>selected = "selected"<% }%>>客服部</option>
+                            <option value="生产部" <% if(result[i].depart=='生产部') { %>selected = "selected"<% }%>>生产部</option>
+                            <option value="产品部" <% if(result[i].depart=='产品部') { %>selected = "selected"<% }%>>产品部</option>
+                            <option value="质检部" <% if(result[i].depart=='质检部') { %>selected = "selected"<% }%>>质检部</option>
+                            <option value="视觉设计部" <% if(result[i].depart=='视觉设计部') { %>selected = "selected"<% }%>>视觉设计部</option>
+                            <option value="平台运营部" <% if(result[i].depart=='平台运营部') { %>selected = "selected"<% }%>>平台运营部</option>
+                            <option value="网站运营部" <% if(result[i].depart=='网站运营部') { %>selected = "selected"<% }%>>网站运营部</option>
+                            <option value="人事行政部" <% if(result[i].depart=='人事行政部') { %>selected = "selected"<% }%>>人事行政部</option>
+                            <option value="基础研发部" <% if(result[i].depart=='基础研发部') { %>selected = "selected"<% }%>>基础研发部</option>
+                            <option value="基础研发部" <% if(result[i].depart=='品牌运营部') { %>selected = "selected"<% }%>>品牌运营部</option>
+                        </select>
+                    </span>
+                </td>
+              </tr>
+              <tr>
+                <td align="right" class="colbg">招聘人数：</td>
+                <td>
+                    <input type="text" name="job_number_<%= i %>" id="job_number_<%= i %>" value="<%= result[i].jobNumber %>" class="input">
+                </td>
+                <td align="right" class="colbg">薪资：</td>
+                <td>
+                    <input type="text" name="job_pay_<%= i %>" id="job_pay_<%= i %>" value="<%= result[i].jobPay %>" class="input">
+                </td>
+              </tr>
+              <tr>
+                <td align="right" class="colbg">岗位职责：</td>
+                <td colspan="3">
+                    <textarea name="detail_<%= i %>" id="detail" cols="30" rows="10" class="textarea" style="width:80%;"><%= result[i].detail %></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td align="right" class="colbg">岗位要求：</td>
+                <td colspan="3">
+                    <textarea name="job_req_<%= i %>" id="job_req_<%= i %>" cols="30" rows="10" class="textarea" style="width:80%;"><%= result[i].jobReq %></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td align="right" class="colbg">发布时间：</td>
+                <td>
+                    <input type="text" name="date_<%= i %>" value="<%= result[i].date %>" class="input">
+                </td>
+                <td align="right" class="colbg">是否启用：</td>
+                <td>
+                    <span class="dropdown">
+                        <select name="visible_<%= i %>" id="visible">
+                            <option value="true" <% if(result[i].visible) { %>selected<% }%>>是</option>
+                            <option value="false" <% if(!result[i].visible) { %>selected<% }%>>否</option>
+                        </select>
+                    </span>
+                </td>
+              </tr>
+              <tr class="gap">
+                <td colspan="5"></td>
+              </tr>
+              <% } %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" align="center">
+                    <%- include('../pager.ejs') %>
+                </td>
+              </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="sbmt center">
+        <button type="submit" class="button bu"><span>确 定</span></button>
+        <a href="/joblist" class="button ga"><span>返 回</span></a>
+    </div>    
+    </form>
+    <script type="text/javascript">
+        require(['lovevox_ui','xheditor'], function ($){
+
+            (function($) {
+                // var RegValid = new ZUI.Validator("editFm",{
+                //     ruleTag:'.validate',
+                //     tagClass:'Vmsg',
+                //     passClass:'',
+                //     Qmode:false,
+                //     autoSbmit:false,
+                //     submitBtn:'#sendBtn',
+                //     onSubmit: function(fm,err,btn){
+                //         if(err>0){
+                        
+                //         }else{
+                //             $(btn).addClass('wait').prop('disabled',true);
+                //             fm.submit();
+                //         }
+                //     }
+                // });
+
+                $(document).ready(function() {
+                    $('.textarea').xheditor({
+                        tools:'Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,|,Align,List,Outdent,Indent,|,Link'
+                    });
+                });
+            })(jQuery);
+        });
+    </script> 
+<%-  include('../footer_single.ejs') %>

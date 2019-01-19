@@ -1,0 +1,282 @@
+<% include header.ejs %>
+	<!--@Header-->
+	<div class="header">
+		<h1 class="logo"><a href="#" title="<%= title %>"></a></h1>
+		<ul id="local" class="local menuTrigger">
+			<li data-menuanchor="Start" class="active"><a href="#Start">Start</a></li>
+			<li data-menuanchor="Introduction"><a href="#Introduction">Introduction</a></li>
+			<li data-menuanchor="Product"><a href="#Product">Product</a></li>
+			<li data-menuanchor="Cooperation"><a href="#Cooperation">Cooperation</a></li>
+			<li data-menuanchor="Joinus"><a href="#Joinus">Join Us</a></li>
+		</ul>
+	</div>
+	<!--\\Header-->
+	<!--@MenuCall-->
+	<div class="menuBar">
+		<svg class="icon_menu menuCall" viewBox="0 0 100 100">
+			<polyline class="line one" points="10 20, 90 20" />
+			<polyline class="line two" points="10 50, 90 50" />
+			<polyline class="line three" points="10 80, 90 80" />
+		</svg>
+	</div>
+	<!--\\MenuCall-->
+	<!--@Menu-->
+	<div class="menuBox">
+		<ul class="menu menuTrigger">
+			<li data-menuanchor="Start" class="active"><img src="images/menu01.jpg" alt="乐薇首页"><a href="#Start">乐薇首页</a></li>
+			<li data-menuanchor="Introduction"><img src="images/menu02.jpg" alt="了解乐薇"><a href="#Introduction">了解乐薇</a></li>
+			<li data-menuanchor="Product"><img src="images/menu03.jpg" alt="产品中心"><a href="#Product">产品中心</a></li>
+			<li data-menuanchor="Cooperation"><img src="images/menu04.jpg" alt="业务合作"><a href="#Cooperation">业务合作</a></li>
+			<li data-menuanchor="Joinus"><img src="images/menu05.jpg" alt="加入我们"><a href="#Joinus">加入我们</a></li>
+		</ul>
+	</div>
+	<div class="menuBg"></div>
+	<!--\\Menu-->
+	<div id="fullpage" class="main">
+		<!--@Home-->
+
+		<div class="section home" id="section0">
+			<div class="homevs">
+				<img src="images/blank.png" data-src="images/home_bg05.png" class="hvs01 hmItem" alt="乐薇"/>
+				<img src="images/blank.png" data-src="images/join_bg.png" class="hvs02 hmItem" alt="乐薇"/>
+				<img src="images/blank.png" data-src="images/product_bg.png" class="hvs03 hmItem" alt="乐薇"/>
+				<img src="images/blank.png" data-src="images/coop_bg.png" class="hvs04 hmItem" alt="乐薇"/>
+				<img src="images/blank.png" data-src="images/home_bg04.png" class="hvs05 hmItem" alt="乐薇"/>
+				<img src="images/blank.png" data-src="images/home_bg03.png" class="hvs06 hmItem" alt="乐薇"/>
+				<img src="images/blank.png" data-src="images/product_bg01.png" class="hvs07 hmItem" alt="乐薇"/>
+				<img src="images/blank.png" data-src="images/join_bg2.png" class="hvs08 hmItem" alt="乐薇"/>
+				<img src="images/blank.png" data-src="images/about_bg.png" class="hvs09 hmItem" alt="乐薇"/>
+			</div>
+			<a href="javascript:;" class="scrolldown"><span></span></a>
+		</div>
+		<!--//Home-->
+		<!--@About-->
+		<div class="section about" id="section1">
+			<img src="images/blank.png" data-src="images/about_bg.png" alt="aboutbg" class="abItem bg_about">
+			<div class="aboutBox abItem">
+				<div class="doTable">
+					<div class="doTd tip">让婚礼充满喜悦</div>
+					<div class="doTd">
+						<div class="aboutShort">
+							<h2 class="title aboutTit">
+								<div><img src="images/blank.png" data-src="images/aboutTit.svg" alt="乐薇简介" title="乐薇简介" class="titsvg"/></div>
+								<img src="images/blank.png" data-src="images/about_bg02.png" alt="乐薇简介" class="tvs01">
+							</h2>
+							<div class="shortTxt">
+								<p>乐薇成立于2011年，是一家制作和销售婚庆类消费品的公司；
+	产品涵盖婚纱，礼服，新娘配饰，结婚礼品，和宴会装饰品等。</p>
+							</div>
+							<a href="about.html" data-action="1" class="pageCall button wt big"><span>MORE</span></a>
+						</div>
+						
+					</div>
+					<div class="doTd"><img src="images/blank.png" data-src="images/about_01.jpg" alt="aboutbg" class="fw"/></div>
+					<div class="doTd gap"></div>
+				</div>
+				
+			</div>
+		</div>
+		<!--//About-->
+		<!--@Product-->
+		<div class="section product" data-height="auto" id="section2">
+			<div class="proBox proItem">
+				<div class="doTable">
+					<div class="doTd">
+						<div class="proShort">
+							<h2 class="title">
+								<div><img src="images/productTit.svg" alt="产品中心" title="产品中心" class="titsvg"/></div>
+							</h2>
+							<div class="shortTxt">
+								<p>公司销售的部分产品由乐薇工作室设计制作。婚礼不一定要花很多钱，但要用心，我们希望把美好和温暖的产品传递给新人。</p>
+
+							</div>
+							<a href="product.html" data-action="1" class="pageCall button wt big"><span>MORE</span></a>
+							<img src="images/product_bg01.png" alt="产品中心" class="pvs01"/>
+						</div>
+					</div>
+					<div class="doTd sliderbox">
+						<div class="slide" id="slide1">
+							<img src="images/blank.png" data-src="images/product_sl01.jpg" alt="aboutbg" class="fw"/>
+						</div>
+						<div class="slide" id="slide2">
+							<img src="images/blank.png" data-src="images/product_sl02.jpg" alt="aboutbg" class="fw"/>
+						</div>
+						
+						<div class="sliderPage clear">
+							<div class="doTable">
+								<div class="doTd current">01</div>
+								<div class="doTd total">02</div>
+							</div>
+						</div>
+					</div>
+					<div class="doTd gap"></div>
+				</div>
+			</div>
+			<img src="images/product_bg.png" alt="products" class="proItem bg_product"/>
+
+		</div>
+		<!--//Product-->
+		<!--@Cooperation-->
+		<div class="section cooperation" data-height="auto" id="section3">
+			<div class="coopBox coopItem">
+				<h2 class="title">
+					<div><img src="images/blank.png" data-src="images/coopTit.svg" alt="业务合作" title="业务合作" class="titsvg"/></div>
+				</h2>
+				<ul class="cooplist">
+					<li>
+						<div class="coopIco icon_phone">
+							
+						</div>
+						<div class="doTd">
+							<p><strong>电话:</strong> 027-67849648</p>
+							<p><strong>工作时间:</strong> 周一至周五 9:00-18:00 （节假日除外）</p>
+						</div>
+					</li>
+					<li>
+						<div class="coopIco icon_mail">
+							
+						</div>
+						<div class="doTd">
+							<p><strong>联络邮箱:</strong> 联络邮箱: hr@lewei.mobi  (招聘)</p>   
+							<p>pr@lewei.mobi  (媒体合作)</p>
+							<p>damien@lewei.mobi  (投诉意见)</p>
+						</div>
+					</li>
+					<li>
+						<div class="coopIco icon_gps">
+							
+						</div>
+						<div class="doTd">
+							<p><strong>乘车指南:</strong> 公交车788、333路 (南湖大道关南三路站)</p>
+							<p>718、 757、758、759、 787路 (光谷大道现代世贸中心站)行走至关南园四路 东港产业科技园2号楼，上3楼即达</p>
+						</div>
+					</li>
+					<li>
+						<div class="coopIco icon_addr">
+							
+						</div>
+						<div class="doTd">
+							<p><strong>电话:</strong> 027-67849648</p>
+							<p><strong>工作时间:</strong> 周一至周五 9:00-18:00 （节假日除外）</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<img src="images/blank.png" data-src="images/coop_bg.png" alt="cooperation" class="bg_coop coopItem"/>
+			<div class="mapBox coopItem" id="bmap">
+				
+			</div>
+			
+
+		</div>
+		<!--//Cooperation-->
+		<!--@Join-->
+		<div class="section joinus" data-height="auto" id="section4">
+			<div class="joinBox joinItem">
+
+				<h2 class="title">
+					<div><img src="images/blank.png" data-src="images/joinTit.svg" alt="加入乐薇" title="加入乐薇" class="titsvg"/></div>
+				</h2>
+				<div class="center ft14">加入乐薇，让我们一同成长，发现生活的美好。</div>
+
+				<div class="joinCont clear">
+					<div class="cols_8" id="jobsBox">
+						<% include jobs.ejs %>
+
+					</div>
+					<div class="cols_4">
+						<div class="contact">
+							<h2>在线留言</h2>
+							<form id="contactFm" action="/contact">
+							<ul class="fmUL">
+								<li class="b" id="nameli">
+									<label for="contactname" class="doLB">姓名:</label>
+									<div class="control">
+										<input id="contactname" class="input validate" type="text" name="contactname" data-valid="elemt:'#contactname',rule:'required',warn:_ZUI_This is a required field._ZUI_,pass:'&nbsp;',passhide:1,tar:'#nameli'">
+									</div>
+								</li>
+								<li class="b" id="phoneli">
+									<label for="telephone" class="doLB">电话:</label>
+									<div class="control">
+										<input id="telephone" class="input" type="text" name="telephone">
+									</div>
+								</li>
+								<li class="b" id="mailli">
+									<label for="mail" class="doLB">邮箱:</label>
+									<div class="control">
+										<input id="mail" class="input validate" type="text" name="mail" data-valid="elemt:'#mail',rule:'email',warn:_ZUI_This is a required field._ZUI_,pass:'&nbsp;',passhide:1,tar:'#mailli'">
+									</div>
+								</li>
+								<li class="b" id="messli">
+									<label for="message" class="doTd">留言:</label>
+									<div class="control">
+										<textarea id="message" class="textarea validate" rows="4" title="留言" name="message" data-valid="elemt:'#message',rule:'range',warn:_ZUI_This is a required field._ZUI_,range:'1,300',pass:'&nbsp;',passhide:1,tar:'#messli'"></textarea>
+									</div>
+								</li>
+								<li class="b">
+									<button type="button" class="button re" title="提 交" name="send" id="send">
+					                    <span>提 交</span>
+					                </button>
+								</li>
+							</ul>
+							</form>
+						</div>
+						<img src="images/blank.png" data-src="images/join_bg2.png" alt="joinUs" class="bg_join2 joinItem"/>
+					</div>
+					
+				</div>
+
+				<div class="footer clear">
+					<div class="copy">乐薇 · LOVE.STUDIO 版权所有</div>
+					<div class="social">
+						<a href="" class="footIco icon_sina"></a>
+						<a href="" class="footIco icon_weibo"></a>
+						<a href="" class="footIco icon_qq"></a>
+						<a href="" class="footIco icon_weixin"></a>
+					</div>
+				</div>
+
+			</div>
+			<img src="images/blank.png" data-src="images/join_bg.png" alt="joinUs" class="bg_join joinItem"/>
+			
+		</div>
+		<!--//Join-->
+	</div>
+
+
+	<!--@subPage-->
+	<em class="pageClose pageCall"></em>
+	<div class="subPage">
+		<div class="pageScroll">
+			<div class="scrollScope" id="dataBox">
+
+			</div>
+		</div>
+	</div>
+	<!--//subPage-->
+
+	<!--@joinPage-->
+	<em class="joinClose jobItem"></em>
+	<div class="joinPage">
+		<div class="pageScroll">
+			<div class="scrollScope" id="dataJoin">
+				
+			</div>
+		</div>
+	</div>
+	<!--//joinPage-->
+	<div class="bgv" id="bgv"><img src="images/bgv.png" alt="<%= title %>"></div>
+	<div class="load">
+		<div>O</div>
+		<div>I</div>
+		<div>D</div>
+		<div>U</div>
+		<div>T</div>
+		<div>S</div>
+		<div>E</div>
+		<div>V</div>
+		<div>O</div>
+		<div>L</div>
+	</div>
+
+<% include footer.ejs %>

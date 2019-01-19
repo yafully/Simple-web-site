@@ -1,0 +1,38 @@
+<%-  include('../header_single.ejs') %>
+    <div class="blockFm">
+    	<ul class="fmUL">
+            <li class="doTit center">
+                <h1>访客详情</h1> 
+            </li>
+            <li class="b"></li>
+            <li class="b">
+                <div for="job_name" class="doTd"><strong>姓名：</strong></div>
+                <div class="control">
+                    <%= result[0].name %>
+                </div>
+            </li>
+            <li class="b">
+                <div for="job_name" class="doTd"><strong>电话：</strong></div>
+                <div class="control">
+                    <%= result[0].phone %>
+                </div>
+            </li>
+            <li class="b">
+                <div for="job_name" class="doTd"><strong>邮箱：</strong></div>
+                <div class="control">
+                    <%= result[0].email %>
+                </div>
+            </li>
+            <li class="b">
+                <div for="job_name" class="doTd"><strong>留言：</strong></div>
+                <div class="control">
+                    <%= result[0].content %>
+                </div>
+            </li>
+            <li class="sbmt center">
+                <a href="javascript:history.back();" class="button ga">返 回</a>
+                
+            </li>
+        </ul>    
+    </div>
+<%-  include('../footer_single.ejs') %>

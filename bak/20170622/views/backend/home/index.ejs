@@ -1,0 +1,90 @@
+<%-  include('../header_single.ejs') %>
+
+
+
+
+
+<div id="container" style="min-width:400px;height:400px"></div>
+
+<script type="text/javascript">
+
+
+
+    require(['jquery','H'],function($){
+		var datas =[];
+	    <% for(var i = 0; i < totals.everyDay.length; i++) { %>
+			datas[<%=i%>] = ['<%= totals.everyDay[i]._id%>',parseInt('<%= totals.everyDay[i].total%>')];
+	    <% } %>
+
+		var day = new Date(),
+	        year = day.getFullYear(), 
+	        month = day.getMonth() + 1,
+	        lastday = new Date(year,month,0).getDate();
+	    var xCategory=[],frequency=[];
+	    var subtitle = '今日访问量：<%= totals.day %>，历史总访问量：<%= totals.all %>';
+
+
+
+	    for(var d=0; d<lastday; d++){
+	    	var k = parseInt(d);
+	    	frequency[k] = 0;
+	    	for(var i = 0; i < datas.length; i++) {
+
+	    		if(k+1 == new Date(datas[i][0]).getDate()){
+	    			frequency[k] = datas[i][1];
+	    			
+	    			//console.log(datas[i][1]);
+	    		}
+
+	    	}
+	    	var fixday = (k+1).toString().length>1 ? k+1 : '0'+(k+1);
+	    	xCategory[k] = year+"-"+month+"-"+fixday;
+	    }
+
+
+        (function($) {
+            $(document).ready(function() {
+
+                $('#container').highcharts({
+			        chart: {
+			            type: 'line'
+			        },
+			        title: {
+			            text: '本月网站访问统计'
+			        },
+			        subtitle: {
+			            text: subtitle
+			        },
+			        xAxis: {
+			        	type: 'datetime',
+			            categories: xCategory
+			        },
+			        yAxis: {
+			            title: {
+			                text: '访问次数'
+			            }
+			        },
+			        tooltip: {
+				        crosshairs: true,
+				        shared: false,
+				        valueSuffix: '次'
+				    },
+			        plotOptions: {
+			            line: {
+			                dataLabels: {
+			                    enabled: false          // 开启数据标签
+			                },
+			                enableMouseTracking: true // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+			            }
+			        },
+			        series: [{
+			            name: '日均访问量',
+			            data: frequency
+			        }]
+			    });
+
+            });
+        })(jQuery);
+    });
+</script>
+<%-  include('../footer_single.ejs') %>

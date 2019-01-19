@@ -1,0 +1,79 @@
+//ProJect:Topwedding
+//For:Adds
+//Author:YafullyZhao
+//Date:2016.05.17
+
+.button{height:34px;
+	&.big{font-size:1rem;
+		span{padding: 0;}
+	}
+	&.small{font-size:1rem;}
+	span{
+		&:before{top:-4rem;}
+	}
+}
+button.button,input.button{.sizeBox;}
+a.button,span.button{height:36px !important;padding:0 1rem;
+	line-height: 34px;
+	&.big{font-size:1rem;height: 36px !important;}
+	&.small{font-size:1rem;}
+	span{line-height: 34px;}
+}
+
+
+.input{height:34px;}
+select,.select {height: 36px;}
+
+.dropdown {height:36px;
+	&:after{top: 12px;}
+}
+
+/*forms*/
+.fmUL{
+	& > li{
+		.req{padding-right:1.5rem;}
+		.req:after{right:10px;top:2px;}
+		.Vmsg{position:static;line-height:12px;}
+		.Vmsg.Verro{color:#f27575;}
+		.button{padding: 6px 15px;}
+	}
+	.t{padding:1rem 0 1.5rem;font-szie:1.6rem;
+		
+	}
+	.b{padding-bottom:1rem;
+		&>label{display:inline-block;color:#555;padding-bottom:.5rem;}
+		.control{
+			
+			textarea,.input,.select{width:100%;}
+		}
+		.dropdown{display:block;width:100%;}
+	}
+	.n{padding-bottom:10px;}
+	.doTable{
+		
+		label.doTd{.vm;width:auto;.left;padding-top: 0;
+			&.mhide{.hide;}
+			&:after{top:2px;}
+		}
+		
+		div.doTd{.blk;width:100%;padding-bottom:1rem;
+			.input,.sbmt,.dropdown,.textarea,select.required-entry{width:100%;}
+
+			
+			.button{padding: 5px 15px;}
+		}
+		.btnInline{width:100%;
+			.doTd:first-child{width:60%;.doTd;}
+			.doTd.br{.doTd;width:40%;}
+			
+		}
+		
+	}
+	
+}
+.sbmt{padding:1rem 0 2rem;
+	input.button,button.button,a.button{width:100%;}
+	.button+.button{margin-top: 1rem;margin-left: 0}
+}
+
+.revPrev{padding:0;.hide;}

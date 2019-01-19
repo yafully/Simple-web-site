@@ -1,0 +1,36 @@
+
+<div class="joinDetail">
+    <div class="joinGap"></div>
+    <div class="joinTxt">
+        <div class="joinItem joinSum">
+            <h2><%= data.data.jobName %></h2>
+            <ul class="listSum">
+                <li class="listSumHead">
+                    <div class="doTd">部门</div>
+                    <div class="doTd">招聘人数</div>
+                    <div class="doTd">薪资范围</div>
+                </li>
+                <li>
+                    <div class="doTd"><%= data.data.depart %></div>
+                    <div class="doTd"><%= data.data.jobNumber %>人</div>
+                    <div class="doTd"><%= data.data.jobPay %></div>
+                </li>
+            </ul>
+        </div>
+        <div class="joinItem article">
+            <h3>岗位职责</h3>
+            <%- data.data.detail %>
+        </div>
+        <div class="joinItem article">
+            <h3>任职要求</h3>
+            <%- data.data.jobReq %>
+        </div>
+        <div class="joinSbmt">
+            <a href="mailto:hr@lewei.mobi" class="button wt big"><span>申  请</span></a>
+            <div class="pd5">点击申请，直接链接到我们HR的邮箱，发送邮件</div>
+        </div>
+    </div>
+</div>
+<div class="footer clear">
+    <div class="copy">Copyright © 2011 - 2016 乐薇版权所有</div>
+</div>

@@ -1,0 +1,170 @@
+//ProJect:Topwedding-Mobile
+//For:Main
+//Author:YafullyZhao
+//Date:2016.06.08
+
+/*--模块依赖--*/
+@import "core";
+//--reset
+.normalize;
+.reset;
+//--栅格
+//.generate-columns(12);
+.articleStyle;
+
+.red,.red:link,.red:visited{color:#c81a1a !important}
+.green,.green:link,.green:visited{color:#68a772}
+.pink,.pink:link,.pink:visited{color:#e96f66}
+.blue,.blue:link,.blue:visited{color:#016481 !important}
+.sky,.sky:link,.sky:visited{color:#4dc1df;}
+.oran,.oran:link,.oran:visited{color:#993d06;}
+.brown,.brown:link,.brown:visited{color:#cfa972}
+.gray,.gray:link,.gray:visited{color:#999}
+.silver,.silver:link,.silver:visited{color:#666}
+.white,.white:link,.white:visited{color:#fff}
+.black,.black:link,.black:visited{color:#333}
+a.fbi{color:#a6b5d4}
+a.twi{color:#a8e1fc}
+a.pii{color:#92c5e4}
+a.ggi{color:#f4afaf}
+a.ppi{color:#f49b62}
+a.ytb{color:#ec5d57;}
+
+
+img.lzy{background:#fff url(../images/loading/spin.gif) no-repeat 50% 50%;}
+//字体
+
+.font-face('Montserrat-Light','Montserrat-Light','../fonts/');
+//bold
+//.font-face('lato-bold-webfont','lato-bold-webfont','../fonts/');
+//Medium
+//.font-face('Brandon_med','Brandon_med','../fonts/');
+//regular
+.font-face('Montserrat-Regular','Montserrat-Regular','../fonts/');
+
+//Icons
+.font-face('icomoon','icomoon','../fonts/');
+
+[data-icon]:before {font-family:'icomoon';content:attr(data-icon);speak:none;font-weight:normal;font-variant: normal;text-transform: none;line-height: 1;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+
+.icon,.icon14,.icon16,.icon20,.icon26,.icon32,.icon36,.icon40,.icon48,.icon64{.vm;white-space:nowrap;.center;}
+.icon14{.iconSize(14px,12px);}
+.icon16{.iconSize;}
+.icon20{.iconSize(20px,20px);position: relative;
+	&.icon_chat:before{top:0;left:0;font-family:'icomoon';.bgicon(20px,18px,'\e91c',#333);}
+}
+.icon24{.iconSize(24px,24px);}
+.icon26{.iconSize(26px,24px);}
+.icon32{.iconSize(32px,30px);}
+.icon36{.iconSize(36px,34px);}
+.icon40{.iconSize(40px,38px);}
+.icon48{.iconSize(48px,46px);}
+.icon64{.iconSize(64px,62px);}
+
+html{font-size:100%;}
+html,body{height:100%;margin: 0;padding: 0;}
+body{overflow:hidden;font: 13px/1.8  "微软正黑体", "新细明体" ,Arial,Helvetica, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust: 100%;-webkit-overflow-scrolling:touch;-webkit-font-smoothing: antialiased;background:#fff;color:@TxtColor;
+	will-change:scroll-position;background:url('data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QOPaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjUtYzAxNCA3OS4xNTE0ODEsIDIwMTMvMDMvMTMtMTI6MDk6MTUgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NWQ5NjFlODAtY2Y1Ni0zNzQyLWEzNDItZTE3NTkyZGQyYTMxIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVGNjQyNkU4MUQ5MzExRTdBM0ZCRjIzNUUxOTAxQzA5IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVGNjQyNkU3MUQ5MzExRTdBM0ZCRjIzNUUxOTAxQzA5IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE1IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NmM2ZmQwMTgtNzQ2OS00YjNkLWEyZGEtY2RmNzA3M2FmNDA4IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6OWNjYmU3YzktNWNkMy0xMTdhLWJjOGEtYTdkMDhlNGNhMGE1Ii8+IDwv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');
+}
+.wrap{max-width: 1200px;width: 100%;margin:0 auto;position: relative;z-index:1;.sizeBox;}
+.columns{}
+.sidebar{width:25.3%;padding-right: 2%;.sizeBox;.fleft;}
+.column{width:74.7%;.sizeBox;.fleft;}
+
+/*表单*/
+@import "form";
+/*header*/
+@import "header";
+/*title*/
+@import "title";
+/*list*/
+@import "list";
+/*main*/
+@import "main";
+/*about*/
+@import "about";
+/*product*/
+@import "product";
+/*fullpage*/
+@import "fullpage";
+/*scroll*/
+@import "scrollbar";
+/*lovevoxui*/
+@import "lovevoxui";
+/*chat*/
+@import "chat";
+
+//Mobile 
+@media screen and (max-width:1700px) {
+	@import "main_mid";
+}
+@media screen and (max-width:800px) {
+	html{font-size:75%;}
+	body{overflow-x:hidden;overflow-y:auto;font-size: 1rem;-webkit-text-size-adjust:100%;-ms-text-size-adjust: 100%;-webkit-overflow-scrolling:touch;/*-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-font-smoothing: antialiased;*/}
+	.wrap{padding: 0 8px;}
+	.main{padding-top: 54px;}
+	.sidebar{width:100%;padding-right:0;.fnone;}
+	.column{width:100%;.fnone;}
+
+	.mhide{display: none !important;}
+	.whide{display: block;}
+	/*表单*/
+	@import "form_mobi";
+	/*header*/
+	@import "header_mobi";
+	/*title*/
+	@import "title_mobi";
+	/*list*/
+	@import "list_mobi";
+	/*main*/
+	@import "main_mobi";
+	/*about*/
+	@import "about_mobi";
+	/*product*/
+	@import "product_mobi";
+	/*fullpage*/
+	@import "fullpage_mobi";
+	/*scroll*/
+	@import "scrollbar_mobi";
+	/*lovevoxui*/
+	@import "lovevoxui_mobi";
+}
+@media only screen and (device-width: 768px) {//pad
+	.list{
+		.proItem{width:23.5%;margin:0 0 3% 2%;}
+	}
+}
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  /* For portrait layouts only 纵向*/
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+  /* For landscape layouts only 横向*/
+}
+
+@media screen and (min-width: 320px) {
+	html{font-size:75%;}
+}
+@media screen and (min-width: 360px) {
+	html{font-size:85%;}
+}
+
+@media screen and (min-width: 560px) {
+	html{font-size:85%;}
+}
+
+@media screen and (min-width: 768px) {
+	html{font-size:75%;}
+}
+
+@media only screen and (-webkit-device-pixel-ratio:.75),
+ only screen and (-webkit-device-pixel-ratio:1),
+ only screen and (-webkit-device-pixel-ratio:1.5),
+ only screen and (-webkit-min-device-pixel-ratio: 2) {
+	/* Put CSS for medium density (mdpi) Android layouts in here */
+	html{font-size:65%;}
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+	html{font-size:75%;}
+}

@@ -1,0 +1,57 @@
+//ProJect:Lovevox site
+//For:Chat
+//Author:YafullyZhao
+//Date:2017.05.11
+/*--模块依赖--*/
+.chatApp{
+	position:fixed;width:300px;height:400px;z-index:1000;bottom:1px;right:2px;border:2px solid #000;background: #fff; 
+	.chatframe{.fleft;width:100%;height: 100%;}
+}
+
+.chatBox{
+	
+	.contact{
+		padding: 2em 5px;
+	}
+
+}
+
+.chatroom{}
+.userBox{max-height: 100px;overflow: hidden;overflow-y: auto;.sizeBox;
+	.userlist{
+		li+li{border-top: 1px solid #fafafa;}
+	}
+}
+
+.chats{overflow:hidden;
+	li{position:relative;padding:5px 0 5px 40px;.clear;overflow: hidden;
+		&.me{.fleft;clear:right;
+			.chatAvatar{left:0;}
+			.chat_cont{border-left:2px solid #14648b;background:#f3faff;}
+			.chat_cont:after{left:-13px;border-color:transparent #14648b transparent transparent;}
+		}
+		&.other{
+			padding:5px 40px 5px 0;.fright;clear:left;
+			.chatAvatar{right:0;}
+			.chat_cont{border-right:2px solid #ccc;background:#f9f9f9;text-align:right}
+			.chat_cont:after{right:-13px;border-color:transparent transparent transparent #ccc;}
+		}
+		&.system{
+			width:100%;.sizeBox;margin:.8em 0;padding:5px;border: 1px solid #fc0;background: #ffd;border-radius: 2px;line-height: 1.2;
+		}
+	}
+}
+.chatAvatar{position:absolute;top:10px;width:32px;height:32px;overflow:hidden;box-shadow: 0 0 5px #aeaeae;
+	img{padding:1px;border:1px solid #ccc;background:#fff;max-width: 100%;.sizeBox;}
+}
+.chat_cont{position:relative;padding:8px;
+	&:after{content:'';position:absolute;top:15px;display:block;border-style:solid;border-width:6px;font-size:0;height:0;width:0;margin:0 auto}
+	.chat_meta{line-height: 1.1}
+	.chat_txt{padding-top: 8px;line-height: 1.4}
+}
+
+
+.chatli{position:relative;padding:15px 0 15px 60px;float:left;clear:both;}
+
+#cinput{padding-left: 5px;}
+#outchat{position: absolute;top:4px;right:4px;}

@@ -1,0 +1,23 @@
+<%-  include('../header_single.ejs') %>
+aa
+    <script type="text/javascript">
+        require(['jquery','lovevox_common'],function(){
+            (function($) {
+                $(document).ready(function() {
+                    $('#sortList').on('click','.delet',function(e){
+                        e.preventDefault();
+                        var url = $(this).attr('href');
+                        myBox.confirm('您确定要删除本条记录?',{
+                            boxtitle:'系统提示',
+                            textBoxBtnOk: '确 定', 
+                            textBoxBtnCancel: '取 消',
+                            callback:function(){
+                                window.location = url;
+                            }
+                        });
+                    });
+                });
+            })(jQuery);
+        });
+    </script>
+<%-  include('../footer_single.ejs') %>

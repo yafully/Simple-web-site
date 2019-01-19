@@ -1,0 +1,25 @@
+<ul id="JobList" class="cartlist">
+    <li class="cartHead">
+        <div class="proTd">职位名称</div>
+        <div class="priceTd">部门</div>
+        <div class="txtTd">发布时间</div>
+    </li>
+    <% if(result.length > 0){%>
+        <% for(var i = 0; i < result.length; i++) { %>
+            <li>
+                <div class="proTd">
+                    <a href="/ajaxdetail?id=<%= result[i]._id %>" data-action="1" class="jobItem"><%= result[i].jobName %></a>
+                </div>
+                <div class="priceTd" data-label="<%= result[i].depart %>">
+                    <%= result[i].depart %>
+                </div>
+                <div class="txtTd" data-label="<%= result[i].date %>">
+                    <%= result[i].date %>
+                </div>
+            </li>
+        <% } %>
+    <% }else{ %>
+        <div class="center red">抱歉,暂无相关招聘职位，谢谢您的关注。</div>
+    <% } %>            
+</ul>
+<% include pager.ejs %>

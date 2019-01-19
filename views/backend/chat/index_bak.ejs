@@ -1,0 +1,109 @@
+<%-  include('../header_single.ejs') %>
+
+    <div class="block">   
+        <table id="sortList" class="table border makelist">
+            <colgroup>
+            <col/>
+            <col style="width:100px"/>
+            <col style="width:200px"/>
+            
+            <col style="width:100px"/>
+            <col style="width:140px"/>
+            <col style="width:160px"/>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="6"> 在线咨询集群 </th>
+              </tr>
+              <tr>
+                <td>站点</td>
+                <td>访客总数</td>
+                <td>当前在线访客数</td>
+                <td>客服总数</td>
+                <td>在线客服数</td>
+                <td>操作</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i = 0; i < result.length; i++) { %>  
+              <tr>
+                <td>
+                    <%= result[i]._id.room %>
+                </td>
+                <td align="center">
+                    <%= result[i].customTotal %>
+                </td>
+                <td align="center">
+                    <%= result[i].customOnline %>
+                </td>
+                <td align="center">
+                    <%= result[i].staffTotal %>
+                </td>
+                <td align="center">
+                    <%= result[i].staffOnline %>
+                </td>
+                <td align="center">
+                    <a href="/chatroom?site=<%= result[i]._id.room %>" class="joinroom">进入房间</a> | <a href="" class="delet">删除房间</a>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+            
+        </table>
+    </div>
+
+
+    <script type="text/javascript">
+        require(['jquery','lovevox_common'],function($){
+            (function($) {
+
+                $(document).ready(function() {
+                    $('#sortList').on('click','.delet',function(e){
+                        e.preventDefault();
+                        var url = $(this).attr('href');
+                        myBox.confirm('您确定要删除本条记录?',{
+                            boxtitle:'系统提示',
+                            textBoxBtnOk: '确 定', 
+                            textBoxBtnCancel: '取 消',
+                            callback:function(){
+                                window.location = url;
+                            }
+                        });
+                    })
+                    .on('click','.joinroom',function(e){
+                        e.preventDefault();
+                        var url = $(this).attr('href'),site = $.url.getQueryValue(url,'site');
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            dataType:'json'
+                        })
+                        .done(function(data) {
+                           
+                            if(data.status=='ok'){
+                                var roomurl = '/joinchatadmin?site='+site;
+                                var myWindow = window.open(roomurl,
+                                    '','width=1000,height=500,location=no,directories=no,status=no,menubar=no');
+                                myWindow.focus();
+                                
+                            } else{ 
+                                top.myBox.alert('登录超时.',{
+                                    boxtitle:'系统提示',
+                                    textBoxBtnOk: '确 定',
+                                    callback:function(){
+                                        window.parent.location="/login";
+                                    }
+                                });
+                            };
+                        })
+                        .always(function(){
+                            
+                        });
+
+                        
+                    });
+                });
+            })(jQuery);
+        });
+    </script>
+<%-  include('../footer_single.ejs') %>

@@ -1,0 +1,85 @@
+<% include header.ejs %>
+<div id="chat" class="chatBox">
+
+	<div class="contact">
+		<h2>在线客服</h2>
+		<form id="joinchatFm" action="/joinchat" class="joinchatFm">
+			<ul class="fmUL">
+				
+				<li class="b" id="cmailli">
+					<label for="mail" class="doLB"><%= __('邮箱')%>:</label>
+					<div class="control">
+						<input id="chatmail" class="input validate" type="text" name="chatmail" value="<%= usermail %>" data-valid="elemt:'#chatmail',rule:'email',warn:_ZUI_This is a required field._ZUI_,pass:'&nbsp;',passhide:1,tar:'#cmailli'">
+					</div>
+				</li>
+				<li class="b" id="cnicknameli">
+					<label for="nickname" class="doLB"><%= __('昵称')%>:</label>
+					<div class="control">
+						<input id="nickname" class="input validate" type="text" name="nickname" value="<%= username %>" data-valid="elemt:'#nickname',rule:'required',warn:_ZUI_This is a required field._ZUI_,pass:'&nbsp;',passhide:1,tar:'#cnicknameli'">
+					</div>
+				</li>
+				<li class="hide">
+					<input type="hidden" value="<%= room %>" name="roomname" id="roomname"/>
+				</li>
+				<li class="b">
+					<button type="button" class="button re" title="开始咨询" name="join" id="join">
+	                    <span>开始咨询</span>
+	                </button>
+				</li>
+			</ul>	
+		</form>
+
+	</div>	
+</div>
+<script type="text/javascript">
+	require(['jquery','socket','lovevox_core','lovevox_ui'], function ($,io){
+         (function($) {
+         	
+
+         	var joinchatValid = new ZUI.Validator("joinchatFm",{
+				ruleTag:'.validate',
+				tagClass:'Vmsg',
+				passClass:'',
+				Qmode:false,
+				autoSbmit:false,
+				submitBtn:'#join',
+				onSubmit: function(fm,err,btn){
+					
+					if(err>0){
+					
+					}else{
+						$(btn).addClass('wait').prop('disabled',true);
+						$.ajax({
+							type: "POST",
+							url: fm.attr('action'),
+							dataType:'json',
+							data: fm.serialize()
+						})
+						.done(function(data) {
+							if(data.status=='ok'){
+								location.href = '/chatindex?site=<%= room %>';
+								//$('#chat').addClass('chating');
+								console.log('登录成功');
+							};
+						})
+						.always(function(){
+							$(btn).removeClass('wait').removeProp('disabled');
+						});
+					}
+				}
+			});
+
+        	//服务端广播新用户上线
+   //      	socket.on("userIn",function(data){ 
+        		
+        		
+			// 	if(data.email=='<%= usermail %>'){
+			// 		console.log('Refresh page');
+			// 		location.reload();
+			// 	};
+			// });
+
+         })(jQuery);
+     });
+</script>
+<% include footer.ejs %>

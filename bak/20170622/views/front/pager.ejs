@@ -1,0 +1,52 @@
+<!--@pages-->
+<div id="paging" class="pages">
+	<!--@w-->
+	<div class="mhide">
+        <span class="paging">
+        	<%if(parseInt(pageNumber)>=2){%>
+        	<a href="<%= uri %><%= parseInt(pageNumber)-1 %>" title="上一页" class="Pagedisprev pg"></a>
+        	<%}else{%>
+        	<a href="javascript:;" title="上一页" class="Pagedisprev disabled"></a>
+        	<%}%>
+
+			<% for(var i = 1; i < pageCount+1; i++) { %>
+			 	<% if(pageNumber == i){%>
+			 		<a href="javascript:;" class="clicked"><%= i %></a>
+			 	<% }else{%>
+					<a href="<%= uri %><%= i %>" class="pg"><%= i %></a>
+				<% }%>
+			 	
+			<% } %>
+
+			<%if(parseInt(pageNumber)+1<=pageCount){%>
+			<a href="<%= uri %><%= parseInt(pageNumber)+1 %>" title="下一页" class="Pagenext pg"></a>	
+			<%}else{%>
+			<a href="javascript:;" title="下一页" class="Pagenext disabled"></a>
+			<%}%>
+            
+        </span>
+	</div>
+
+
+	<!--\\w-->
+	<!--@m-->
+	<div class="whide">
+		
+        <div class="doTable">
+        	<% if(parseInt(pageNumber)>=2){ %>
+        	<div class="doTd">
+        		<a href="<%= uri %><%= parseInt(pageNumber)-1 %>" title="上一页" class="button bo pg">上一页</a>
+        	</div>
+        	<%}else{%>
+				<div class="doTd">
+	            	<a href="<%= uri %><%= parseInt(pageNumber)+1 %>" title="下一页" class="button bo pg">下一页</a>
+	            </div>
+        	<%}%>
+
+
+
+        </div>
+    </div>
+	<!--\\m-->
+</div>
+<!--}}pages-->

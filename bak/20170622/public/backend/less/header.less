@@ -1,0 +1,27 @@
+.header{position: fixed;z-index:3;width: 100%;height: 45px;top:0;left:0;background: #fafafa;box-shadow: 0px -1px 3px #000;overflow: hidden;
+	.logo{position: relative;.fleft;width: 199px;height: 45px;border-right: 1px solid #dfdfdf;background: #fff8e6 url(../images/headbg.jpg) no-repeat;.ani;
+		background-size: cover;
+		img{position:absolute;top:0;bottom: 0;right:0;left:0;margin:auto;margin:auto;height:32px;max-width:100%;}
+	}
+	&:before{position:absolute;z-index:3;width:100%;height:1px;content:'';left:0;bottom:0;background:#fff;}
+	.menu_call{.fleft;position:relative;height:45px;width:30px;cursor:pointer;
+		&:after{top:0;left:0;right:0;bottom:0;margin:auto;.bgicon(24px,22px,'\e935',#ad897d);.ani;}
+		&:hover:after{color:#977367;}
+	}
+	
+}
+
+.user_panel{.fright;padding:5px 10px;margin-right:10px;border-right:1px solid #dfdfdf;.sizeBox;
+	li{.vm;}
+	li+li{padding-left: 8px;}
+	.userhead{width: 35px;height:35px;overflow: hidden;border-radius: 20px;
+		img{max-width: 100%}
+	}
+}
+
+.menu_action{
+	.logo{width: 43px;}
+	.menu_call{
+		&:after{content:'\e933';}
+	}
+}

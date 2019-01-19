@@ -1,0 +1,60 @@
+//ProJect:Lovevox site
+//For:Titles
+//Author:YafullyZhao
+//Date:2017.04.17
+/*--模块依赖--*/
+.aboutPage{max-width: 1040px;width: 100%;margin:0 auto;
+
+}
+
+.sologan{.center;padding-top:5%;.sizeBox;position:relative;height:316px;overflow:hidden;background: #f1dcbe;
+	h2{position: relative;z-index:5;padding: 1em 0;font:20px/1 'simsun';.blod;color:#a99269;
+		&:after{content:'';position: absolute;width:50px;height:3px;left:0;right:0;bottom:5px;margin:auto;background: #a99269;}
+	}
+	img{position: absolute;z-index:1;}
+	.soimg02{top:0;left:0;}
+	.soimg01{top:0;right:0;}
+	.soimg03{left:0;right:0;bottom:20%;margin:auto;}
+	.solotxt{padding: 1em 0;}
+}
+
+.ourgoal{
+	margin-left: -40px;margin-top:5%;.doTable;width:560px;.sizeBox;padding: 1em 0;
+	background:#edd4da url(../images/about_05.jpg) 90% 1.5em no-repeat;
+	.doTd{padding-left:40px;}
+	.doTd:first-child{width:200px;padding-top:1em;padding-bottom:1em;font:bold 18px/1.8 'simsun';border-right: 1px solid #fff;color:#8a7759;}
+	
+}
+
+.culture{
+	h2{position:relative;padding:2em 15% 2em 0;.right;font:bold 20px/1.8 'simsun';color:#8a7759;
+		img{position: absolute;bottom: 0;right:0;}
+	}
+	.cItem{.doTable;position:relative;
+		&.c01{}
+		&.c01 .cpic{background: #ebe7de;}
+		&.c01 .cpic:after{content:'01'}
+		&.c02{right: -100px;}
+		&.c02 .cpic{background: #f1e1dd;}
+		&.c02 .cpic:after{content:'02'}
+		&.c03{left: -100px;}
+		&.c03 .cpic{background: #f2e8d9;}
+		&.c03 .cpic:after{content:'03'}
+	}
+	.cItem + .cItem{margin-top: 1.5em;}
+	.cpic{.doTd;width:550px;position: relative;padding:2em 0 2em 100px;.sizeBox;.center;vertical-align: middle;
+		&:after{position: absolute;z-index:2;top:0;left:0;bottom:0;margin:auto;width:100px;height:20px;.center;font:bold 18px/20px Arial;color:#dbcab0;}
+		&:before{content:'';position: absolute;z-index:1;top:0;left:0;width:100px;height:100%;background: #fff;}
+		
+	}
+	.ctxt{.doTd;.right;vertical-align: middle;background: #fff;.sizeBox;padding-right:8%;
+		h3{padding-bottom:1em;font:bold 15px/1.8 'simsun';color:#8a7759;}
+	}
+}
+
+.idea{.doTable;background: #f5dfbf;padding: 4% 5%;margin: 8% 0;.sizeBox;
+	.ipic{.doTd;.right;}
+	.itxt{.doTd;width: 60%;vertical-align: bottom;.sizeBox;padding-bottom:7%;
+		.title{font-size: 20px;}
+	}
+}

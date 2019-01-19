@@ -1,0 +1,119 @@
+<%-  include('../header_single.ejs') %>
+
+    <div class="block">   
+        <table id="sortList" class="table border makelist">
+            <colgroup>
+            <col/>
+            <col style="width:100px"/>
+            <col style="width:200px"/>
+            
+            <col style="width:100px"/>
+            <col style="width:140px"/>
+            <col style="width:160px"/>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="6"> 在线咨询网站集群 </th>
+              </tr>
+              <tr>
+                <td>站点</td>
+                <td>访客总数</td>
+                <td>当前在线访客数</td>
+                <td>客服总数</td>
+                <td>在线客服数</td>
+                <td>操作</td>
+              </tr>
+            </thead>
+            <tbody id="roomlist">
+
+              <tr v-for="(index,room) in rooms" v-bind:id="'room'+index">
+
+                    <td v-html="room.site"></td>
+                    <td align="center" v-html="room.custNum">
+                    </td>
+                    <td align="center" v-html="room.custonline">
+                    </td>
+                    <td align="center" v-html="room.staffNum">
+                    </td>
+                    <td align="center" v-html="room.staffonline">
+                    </td>
+                    <td align="center">
+                        <a href="javascript:;" v-on:click="joinRoom(room.site)">进入房间</a> | 
+                        <a href="javascript:;" v-on:click="delRoom(room.site)" >删除房间</a>
+                    </td>  
+              </tr>
+
+            </tbody>
+            
+        </table>
+    </div>
+
+
+    <script type="text/javascript">
+        require(['vue','jquery','socket','lovevox_common'],function(Vue,$,io){
+            (function($) {
+
+                
+
+                var room = {"rooms":[
+                    <% for(var i = 0; i < result.length; i++) { %>
+                        {"site":"<%= result[i]._id.room %>","custNum":"<%= result[i].customTotal %>","custonline":"<%= result[i].customOnline %>","staffNum":"<%= result[i].staffTotal %>","staffonline":"<%= result[i].staffOnline %>"}
+                        <%if(i<result.length-1){%>,<% } %> 
+                    <% } %>    
+                ]};
+                
+                var roomlistApp = new Vue({
+                  el: '#roomlist',
+                  data: room,
+                  methods:{
+                    joinRoom: function(room){
+                        var url = '/chatroom?site=' + room,roomurl = '/joinchatadmin?site='+room;
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            dataType:'json'
+                        })
+                        .done(function(data) {
+                           
+                            if(data.status=='ok'){
+                                var myWindow = window.open(roomurl,
+                                    '','width=1000,height=500,location=no,directories=no,status=no,menubar=no');
+                                myWindow.focus();
+                            } else{ 
+                                top.myBox.alert('登录超时.',{
+                                    boxtitle:'系统提示',
+                                    textBoxBtnOk: '确 定',
+                                    callback:function(){
+                                        window.parent.location="/login";
+                                    }
+                                });
+                            };
+                        })
+                        .always(function(){
+                            
+                        });
+                    },
+                    delRoom: function(room){
+                        myBox.confirm('您确定要删除房间'+room+'?',{
+                            boxtitle:'系统提示',
+                            textBoxBtnOk: '确 定', 
+                            textBoxBtnCancel: '取 消',
+                            callback:function(){
+                                //window.location = url;
+                            }
+                        });
+                    }
+                  }
+                });
+
+                // socket.on("userIn",function(data){ 
+                //     console.log('UUUUUU');
+                // });
+
+                // $(document).ready(function() {
+
+                // });
+            })(jQuery);
+        });
+    </script>
+<%-  include('../footer_single.ejs') %>

@@ -1,0 +1,7 @@
+{
+ "lang": {
+        "type"  : "Email:",
+        "name"  : "login",
+        "port"  : 8085
+    }
+}

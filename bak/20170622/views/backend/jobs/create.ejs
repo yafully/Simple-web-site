@@ -1,0 +1,135 @@
+<%-  include('../header_single.ejs') %>
+<div class="blockFm">    
+    <form method="post" id="creatFm">
+
+        <ul class="fmUL">
+            <li class="doTit center">
+                <h1>新增招聘信息</h1> 
+            </li>
+            <li class="b"></li>
+            <li class="b">
+                <label for="job_name" class="doTd req">招聘职位：</label>
+                <div class="control">
+                    <input type="text" name="job_name" id="job_name" class="input validate" data-valid="elemt:'#job_name',tip:'#job_name_tip',rule:'required',warn:'请填写招聘职位.',pass:'&nbsp;',passhide:1">
+                    <dfn class="Vmsg" id="job_name_tip"></dfn>
+                </div>
+            </li>
+
+            <li class="b">
+                <label for="depart" class="doTd req">部门：</label>
+                <div class="control">
+                    <span class="dropdown">
+                        <select name="depart" id="depart" class="select validate" data-valid="elemt:'#depart',tip:'#depart_tip',rule:'required',warn:'请选择用人部门.',pass:'&nbsp;',passhide:1">
+                            <option value="">--请选择--</option>
+    
+                            <option value="技术部">技术部</option>
+                            <option value="仓储部">仓储部</option>
+                            <option value="物流部">物流部</option>
+                            <option value="采购部">采购部</option>
+                            <option value="财务部">财务部</option>
+                            <option value="客服部">客服部</option>
+                            <option value="生产部">生产部</option>
+                            <option value="产品部">产品部</option>
+                            <option value="质检部">质检部</option>
+                            <option value="视觉设计部">视觉设计部</option>
+                            <option value="平台运营部">平台运营部</option>
+                            <option value="网站运营部">网站运营部</option>
+                            <option value="人事行政部">人事行政部</option>
+                            <option value="基础研发部">基础研发部</option>
+                            <option value="品牌运营部">品牌运营部</option>
+                        </select>
+                    </span>
+                    <dfn class="Vmsg" id="depart_tip"></dfn>
+                </div>
+            </li>
+
+            <li class="b">
+                <label for="job_number" class="doTd req">招聘人数：</label>
+                <div class="control">
+                    <input type="text" name="job_number" id="job_number" value="" class="input validate" data-valid="elemt:'#job_number',tip:'#job_number_tip',rule:'required',warn:'请填写招聘人数.',pass:'&nbsp;',passhide:1">
+                    <dfn class="Vmsg" id="job_number_tip"></dfn>
+                </div>
+            </li>
+
+            <li class="b">
+                <label for="job_pay" class="doTd req">岗位薪资：</label>
+                <div class="control">
+                    <input type="text" name="job_pay" id="job_pay" value="" class="input validate" data-valid="elemt:'#job_pay',tip:'#job_pay_tip',rule:'required',warn:'请填写岗位薪资.',pass:'&nbsp;',passhide:1">
+                    <dfn class="Vmsg" id="job_pay_tip"></dfn>
+                </div>
+            </li>
+
+            <li class="b">
+                <label for="detail" class="doTd req">岗位职责：</label>
+                <div class="control">
+                    <textarea class="textarea validate" name="detail" id="detail" cols="30" rows="10" data-valid="elemt:'#detail',tip:'#detail_tip',rule:'required',warn:'请填写岗位职责.',pass:'&nbsp;',passhide:1"></textarea>
+                    <dfn class="Vmsg" id="detail_tip"></dfn>
+                </div>
+            </li>
+
+            <li class="b">
+                <label for="job_req" class="doTd req">岗位要求：</label>
+                <div class="control">
+                    <textarea class="textarea validate" name="job_req" id="job_req" cols="30" rows="10" data-valid="elemt:'#job_req',tip:'#job_req_tip',rule:'required',warn:'请填写岗位要求.',pass:'&nbsp;',passhide:1"></textarea>
+                    <dfn class="Vmsg" id="job_req_tip"></dfn>
+                </div>
+            </li>
+
+            <li class="b">
+                <label for="date" class="doTd req">发布时间：</label>
+                <div class="control">
+                    <input type="text" name="date" id="date" value="<%= timestamp %>" class="input validate" data-valid="elemt:'#date',tip:'#date_tip',rule:'required',warn:'请选择发布时间.',pass:'&nbsp;',passhide:1">
+                    <dfn class="Vmsg" id="date_tip"></dfn>
+                </div>
+            </li>
+
+            <li class="b">
+                <label for="visible" class="doTd req">是否启用：</label>
+                <div class="control">
+                    <span class="dropdown">
+                        
+                        <select name="visible" id="visible" class="select validate" data-valid="elemt:'#visible',tip:'#visible_tip',rule:'required',warn:'请选择用人部门.',pass:'&nbsp;',passhide:1">
+                            <option value="true">是</option>
+                            <option value="false">否</option>
+                        </select>
+
+                    </span>
+                    <dfn class="Vmsg" id="visible_tip"></dfn>
+                </div>
+            </li>
+            <li class="sbmt">
+                <button class="button bu" id="sendBtn" type="button"><span>发布职位</span></button>
+                <a href="/joblist" class="fright button ga">返回</a>
+            </li>
+        </ul>            
+    </form>
+</div>    
+    <script type="text/javascript">
+        require(['lovevox_ui','xheditor'], function (){
+            (function($) {
+                var RegValid = new ZUI.Validator("creatFm",{
+                    ruleTag:'.validate',
+                    tagClass:'Vmsg',
+                    passClass:'',
+                    Qmode:false,
+                    autoSbmit:false,
+                    submitBtn:'#sendBtn',
+                    onSubmit: function(fm,err,btn){
+                        if(err>0){
+                        
+                        }else{
+                            $(btn).addClass('wait').prop('disabled',true);
+                            fm.submit();
+                        }
+                    }
+                });
+
+                $(document).ready(function() {
+                    $('.textarea').xheditor({
+                        tools:'Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,|,Align,List,Outdent,Indent,|,Link'
+                    });
+                });
+            })(jQuery);
+        });
+    </script> 
+<%-  include('../footer_single.ejs') %>

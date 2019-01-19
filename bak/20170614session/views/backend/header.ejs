@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html class="ovhide">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+	<!-- 	<link rel="apple-touch-icon" href="/favicon.png"> -->
+	<meta content="telephone=no" name="format-detection">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta name="x5-fullscreen" content="true">
+	<title>::<%= title %>::</title>
+	<link rel="stylesheet" href="/backend/css/styles.css" media="all">
+	<script src="/backend/js/require.js"></script>
+	<script src="/backend/js/config.js"></script>
+</head>
+<body>
+
+<div class="main" id="main">
+	<!--@Header-->
+	<div class="header clear">
+		<h1 class="logo"><img src="/backend/images/logo.svg" alt="武汉乐薇贸有限公司"/></h1>
+		<div class="menu_call"></div>
+		<ul class="user_panel">
+			<li><div class="userhead"><a href="#"><img src="/backend/images/avatar.jpg" alt="username"/></a></div></li>
+			<li><a href="#" class="brown" title="<%= user.name %>"><%= user.name %></a></li>
+			<li><a href="javascript:;" id="logout" class="brown anilink" title="退出">退出</a></li>
+		</ul>
+	</div>
+	<!--//Header-->
+	<div class="desktop">
+

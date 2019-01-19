@@ -1,0 +1,141 @@
+<%-  include('../header_single.ejs') %>
+    
+    <div class="block">
+        <form method="post">
+            <div class="pd5">
+                <input type="radio" name="reach_type" class="searchtype" data-tar="#sinput" value="0" id="_1" <% if(searchType=='0'){ %>checked<%}%>>
+                <label for="_1">按岗位查找</label>
+                <input type="radio" name="reach_type" class="searchtype" data-tar="#ssec" value="1" id="_2" <% if(searchType=='1'){ %>checked<%}%>>
+                <label for="_2">按部门查找</label>
+            </div>
+            <div>
+                
+                <input type="text" class="s input<% if(searchType=='0'){ %> <%}else{%> hide<% } %>" name="keyword" value="<%= keyWord %>" id="sinput" <% if(searchType=='0'){ %><%}else{%>disabled<% } %>>
+                
+                <span class="dropdown<% if(searchType=='1'){ %> <%}else{%> hide<% } %>" id="ssec">
+                    <select name="keyword" class="s select" <% if(searchType=='1'){ %><%}else{%>disabled<% } %>>
+                        <option value="技术部" <% if(keyWord=='技术部') { %>selected = "selected"<% }%>>技术部</option>
+                        <option value="仓储部" <% if(keyWord=='仓储部') { %>selected = "selected"<% }%>>仓储部</option>
+                        <option value="物流部" <% if(keyWord=='物流部') { %>selected = "selected"<% }%>>物流部</option>
+                        <option value="采购部" <% if(keyWord=='采购部') { %>selected = "selected"<% }%>>采购部</option>
+                        <option value="财务部" <% if(keyWord=='财务部') { %>selected = "selected"<% }%>>财务部</option>
+                        <option value="客服部" <% if(keyWord=='客服部') { %>selected = "selected"<% }%>>客服部</option>
+                        <option value="生产部" <% if(keyWord=='生产部') { %>selected = "selected"<% }%>>生产部</option>
+                        <option value="产品部" <% if(keyWord=='产品部') { %>selected = "selected"<% }%>>产品部</option>
+                        <option value="质检部" <% if(keyWord=='质检部') { %>selected = "selected"<% }%>>质检部</option>
+                        <option value="视觉设计部" <% if(keyWord=='视觉设计部') { %>selected = "selected"<% }%>>视觉设计部</option>
+                        <option value="平台运营部" <% if(keyWord=='平台运营部') { %>selected = "selected"<% }%>>平台运营部</option>
+                        <option value="网站运营部" <% if(keyWord=='网站运营部') { %>selected = "selected"<% }%>>网站运营部</option>
+                        <option value="人事行政部" <% if(keyWord=='人事行政部') { %>selected = "selected"<% }%>>人事行政部</option>
+                        <option value="基础研发部" <% if(keyWord=='基础研发部') { %>selected = "selected"<% }%>>基础研发部</option>
+                        <option value="品牌运营部" <% if(keyWord=='品牌运营部') { %>selected = "selected"<% }%>>品牌运营部</option>
+                    </select>
+                </span>
+                    
+                <button type="submit" class="button bu"><span>查 找</span></button>
+            </div>
+        </form>
+    </div>
+
+    <% if(result) { %>
+        <div class="block">
+            <table id="sortList" class="table border makelist">
+                <colgroup>
+                <col/>
+                <col style="width:100px"/>
+                <col style="width:200px"/>
+                
+                <col style="width:100px"/>
+                <col style="width:140px"/>
+                <col style="width:160px"/>
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th colspan="6"> 查询结果 </th>
+                  </tr>
+                  <tr>
+                    <td>职位</td>
+                    <td>招聘人数</td>
+                    <td>部门</td>
+                    <td>状态</td>
+                    <td>发布时间</td>
+                    <td>操作</td>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% for(var i = 0; i < result.length; i++) { %>
+
+                        <tr>
+                            <td>
+                                <%= result[i].jobName %>
+                            </td>
+                            <td align="center">
+                                <%= result[i].jobNumber %>
+                            </td>
+                            <td align="center">
+                                <%= result[i].depart %>
+                            </td>
+                            <td align="center">
+                                <% if(result[i].visible) { %>
+                                    <span style="color:green">可见</span>
+                                <% }else{ %>
+                                    <span style="color:red">不可见</span>
+                                <% }%>
+                            </td>
+                            <td align="center">
+                                <%= result[i].date %>
+                            </td>
+                            <td align="center">
+                                <a href="/edit?id=<%= result[i].id %>&page=<%= pageNumber %>">修改</a> | <a href="/dellist?id=<%= result[i].id %>&page=<%= pageNumber %>" class="delet">删除</a>
+                            </td>
+                      </tr>
+                    <% } %>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="6" align="center">
+                        <%- include('../pager.ejs') %>
+                    </td>
+                  </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="block center">
+            <a href="/joblist" class="button ga"><span>返 回</span></a>
+        </div>
+    <% } %>
+    <script type="text/javascript">
+        require(['jquery','lovevox_common'],function(){
+            (function($) {
+                $(document).ready(function() {
+
+                    $('#sortList').on('click','.delet',function(e){
+                        e.preventDefault();
+                        var url = $(this).attr('href');
+                        myBox.confirm('您确定要退出系统?',{
+                            boxtitle:'系统提示',
+                            textBoxBtnOk: '确 定', 
+                            textBoxBtnCancel: '取 消',
+                            callback:function(){
+                                window.location = url;
+                            }
+                        });
+                    });
+
+                    $('.searchtype').on('change',function(){
+                        var v = $(this).val(),tar = $(this).data('tar');
+
+                        if(v=='1'){
+                           $(tar).removeClass('hide').find('select').removeProp('disabled');
+                           $('#sinput').addClass('hide').prop('disabled','disabled');
+                       
+                        }else{
+                           $(tar).removeClass('hide').removeProp('disabled').val('');
+                           $('#ssec').addClass('hide').find('select').prop('disabled','disabled');
+                        }
+                    });
+                });
+            })(jQuery);
+        });
+    </script>
+<%-  include('../footer_single.ejs') %>

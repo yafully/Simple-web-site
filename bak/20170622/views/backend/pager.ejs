@@ -1,0 +1,27 @@
+
+<div class="pages">
+	<span class="paging">
+    	<%if(parseInt(pageNumber)>=2){%>
+    	<a href="<%= uri %><%= parseInt(pageNumber)-1 %>" title="上一页" class="Pagedisprev pg">上一页</a>
+    	<%}else{%>
+    	<a href="javascript:;" title="上一页" class="Pagedisprev disabled">上一页</a>
+    	<%}%>
+
+		<% for(var i = 1; i < pageCount+1; i++) { %>
+		 	<% if(pageNumber == i){%>
+		 		<a href="javascript:;" class="clicked"><%= i %></a>
+		 	<% }else{%>
+				<a href="<%= uri %><%= i %>" class="pg"><%= i %></a>
+			<% }%>
+		 	
+		<% } %>
+
+		<%if(parseInt(pageNumber)+1<=pageCount){%>
+		<a href="<%= uri %><%= parseInt(pageNumber)+1 %>" title="下一页" class="Pagenext pg">下一页</a>	
+		<%}else{%>
+		<a href="javascript:;" title="下一页" class="Pagenext disabled">下一页</a>
+		<%}%>
+        
+    </span>
+    <span class="vm">第 <%= pageNumber %> / <%= pageCount %>页 </span>
+</div>

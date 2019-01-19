@@ -1,0 +1,79 @@
+<%-  include('../header_single.ejs') %>
+    <div class="block">   
+        <table id="sortList" class="table border makelist">
+            <colgroup>
+            
+            <col style="width:200px"/>
+            <col style="width:200px"/>
+            <col style="width:280px"/>
+            <col/>
+            <col style="width:140px"/>
+            <col style="width:160px"/>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th colspan="6">访客联系列表</th>
+                </tr>
+                <tr>
+                    <td>访客</td>
+                    <td>电话</td>
+                    <td>Email</td>
+                    <td>留言</td>
+                    <td>发布时间</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < result.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= result[i].name %>
+                    </td>
+                    <td align="center">
+                        <%= result[i].phone %>
+                    </td>
+                    <td align="center">
+                        <%= result[i].email %>
+                    </td>
+                    <td align="center">
+                        <%= result[i].content.substring(0,15) %>
+                    </td>
+                    <td align="center">
+                        <%= result[i].date %>
+                    </td>
+                    <td align="center">
+                        <a href="/contactview?id=<%= result[i].id %>">查看详情</a> | <a href="/contactdel?id=<%= result[i].id %>" class="delet">删除</a>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6" align="center">
+                    <%- include('../pager.ejs') %>
+                </td>
+              </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script type="text/javascript">
+        require(['jquery','lovevox_common'],function(){
+            (function($) {
+                $(document).ready(function() {
+                    $('#sortList').on('click','.delet',function(e){
+                        e.preventDefault();
+                        var url = $(this).attr('href');
+                        myBox.confirm('您确定要删除本条记录?',{
+                            boxtitle:'系统提示',
+                            textBoxBtnOk: '确 定', 
+                            textBoxBtnCancel: '取 消',
+                            callback:function(){
+                                window.location = url;
+                            }
+                        });
+                    });
+                });
+            })(jQuery);
+        });
+    </script>
+<%-  include('../footer_single.ejs') %>

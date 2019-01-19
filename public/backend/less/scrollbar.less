@@ -1,0 +1,81 @@
+//ProJect:Veeyoo
+//For:scroll bar
+//Author:YafullyZhao
+//Date:2016.08.24
+/*--模块依赖--*/
+
+.scrollScope {overflow: hidden !important;padding: 0 !important;position: relative;
+    .scroll-content {border: none !important;box-sizing: content-box !important;height: auto;left: 0;margin: 0;max-height: none;max-width: none !important;overflow: scroll !important;padding: 0;position: relative !important;top: 0;width: auto !important;
+        &::-webkit-scrollbar {height: 0;width: 0;}
+    }
+
+    .scroll-element{
+        .scroll-element_track { display: none; }
+        .scroll-bar {background-color: #6C6E71;display: block;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter: alpha(opacity=0);
+            opacity: 0;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px;-webkit-transition: opacity 0.2s linear;-moz-transition: opacity 0.2s linear;-o-transition: opacity 0.2s linear;-ms-transition: opacity 0.2s linear;transition: opacity 0.2s linear;
+        }
+        &.scroll-x {bottom: 0px;height: 0px;left: 0;min-width: 100%;overflow: visible;width:100%;
+            .scroll-bar { height: 7px; min-width: 10px; top: -9px; }
+            .scroll-element_outer { left: 2px; }
+            .scroll-element_size { left: -4px; }
+
+        }
+        &.scroll-x.scroll-scrolly_visible .scroll-element_size { left: -11px; }
+
+        &.scroll-y {height: 100%;min-height: 100%;right: 0px;top: 0;width: 0px;
+            .scroll-bar { left: -9px; min-height: 10px; width: 7px; }
+            .scroll-element_outer { top: 2px; }
+            .scroll-element_size { top: -4px; }
+        }
+        &.scroll-y.scroll-scrollx_visible .scroll-element_size { top: -11px; }
+    }
+    &:hover{
+        .scroll-element .scroll-bar{
+            -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";filter: alpha(opacity=70);opacity: 0.7; }
+
+    }
+    .scroll-element.scroll-draggable .scroll-bar {-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";filter: alpha(opacity=70);opacity: 0.7; }
+
+}
+
+ 
+.scroll-element {
+    display: none;
+}
+.scroll-element, .scroll-element div {
+    box-sizing: content-box;background: none;border: none;margin: 0;padding: 0;position: absolute;z-index: 10;
+}
+.scroll-element div {display: block;height: 100%;left: 0;top: 0;width: 100%;}
+ 
+.scroll-element.scroll-x.scroll-scrollx_visible,
+.scroll-element.scroll-y.scroll-scrolly_visible {
+    display: block;
+}
+ 
+.scroll-element .scroll-bar,
+.scroll-element .scroll-arrow {
+    cursor: default;
+}
+
+// .scrollScope{overflow:hidden !important;position: relative;
+//     .scroll-content {box-sizing: content-box !important;height: auto;left: 0;margin: 0;max-height: none !important;max-width: none !important;overflow: scroll !important;overflow-x: hidden !important;position: relative !important;top:0;width:auto !important;}
+//     .scroll-content::-webkit-scrollbar {height:0;width:0;}
+//     .scroll-element{display:none;position: absolute;z-index: 10;
+//         .scroll-bar,.scroll-arrow {cursor: default;}
+//         div{position: absolute;z-index: 10;height: 100%;left: 0;top: 0;width: 100%;}
+//         .scroll-element_track {display: none; }
+//         .scroll-bar {background-color: #6C6E71;display: block;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);
+// opacity: 0;-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius:7px;-webkit-transition: opacity 0.2s linear;-moz-transition: opacity 0.2s linear;-o-transition: opacity 0.2s linear;-ms-transition: opacity 0.2s linear;transition: opacity 0.2s linear;}
+//         &.scroll-y {height:100%;min-height:100%;right:0px;top:0;width:0px;
+//             .scroll-bar {left:-9px;min-height:10px;width:7px;}
+//             .scroll-element_outer {top:2px; }
+//             .scroll-element_size {top:-4px; }
+//         }
+//         &.scroll-y.scroll-scrollx_visible .scroll-element_size {top:-11px;} 
+//     }
+//     .scroll-element.scroll-x.scroll-scrollx_visible,.scroll-element.scroll-y.scroll-scrolly_visible {display: block;}
+
+//     &:hover .scroll-element .scroll-bar,.scroll-element.scroll-draggable .scroll-bar{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+// filter: alpha(opacity=70);opacity: 0.7;}
+
+// }

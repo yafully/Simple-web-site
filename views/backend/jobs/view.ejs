@@ -1,0 +1,10 @@
+<%-  include('../header_single.ejs') %>
+    <h1>查看详情：</h1>
+    
+    职位：<%= result[0].jobName %><br/>
+    招聘人数：<%= result[0].jobNumber %><br/>
+    部门：<%= result[0].depart %><br/>
+    薪资：<%= result[0].jobPay %><br/>
+
+    <a href="/contactlist">返 回</a>
+<%-  include('../footer_single.ejs') %>

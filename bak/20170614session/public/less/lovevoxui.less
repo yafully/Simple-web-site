@@ -1,0 +1,278 @@
+//ProJect:Topwedding
+//For:lovevoxui
+//Author:YafullyZhao
+//Date:2016.06.02
+
+/*====LovevoxUI====*/
+//Animates
+//pages
+.pages{overflow:hidden;padding:1.5em 0;.center;max-width:600px;margin:0 auto;font-size:14px;
+  .doTd{padding: 0 8px;}
+  .button{width: 100%;
+    &.doLoad{color:transparent;background:url(../images/loading/spin.svg) 50% 50% no-repeat;background-size:20px 20px;
+      
+    }
+  }
+}
+.paging{margin:0 auto;line-height:135%;.vm;
+  a{.vm;padding:6px 10px;text-align:center;margin-right:-1px;color:#a99269;.upper;border: 1px solid #a99269;
+    &:hover{color:#e0510f;.undline;
+  }
+    &.disabled{cursor:default;color:#ccc;}
+    &.disabled:after{color:#ccc;}
+    &.disabled:hover{text-decoration: none;}
+  }
+  .Pagedisprev{padding-left: 25px;margin-right:2em;position: relative;border-color:#fff;
+    &:after{left:0;top:0;bottom:0;margin:auto;.bgicon(20px,18px,'\e901',#a99269);}
+  }
+  .Pagenext{padding-right: 25px;margin-left:2em;margin-right: 2em;position: relative;border-color:#fff;
+    &:after{right:0;top:0;bottom:0;margin:auto;.bgicon(20px,18px,'\e902',#a99269);}
+  }
+  .clicked{.blod;background: #a99269;color:#fff;}
+
+  span{margin:0 3px;display:inline-block;}
+}
+
+
+@-webkit-keyframes drift {
+  0% {
+    -webkit-transform: translateY(0px) rotate();
+            transform: translateY(0px) rotate();
+  }
+  50% {
+    -webkit-transform: translateY(-40px) rotate(-3deg);
+            transform: translateY(-40px) rotate(-3deg);
+  }
+  100% {
+    -webkit-transform: translateY(0px) rotate();
+            transform: translateY(0px) rotate();
+  }
+}
+@keyframes drift {
+  0% {
+    -webkit-transform: translateY(0px) rotate();
+            transform: translateY(0px) rotate();
+  }
+  50% {
+    -webkit-transform: translateY(-40px) rotate(-3deg);
+            transform: translateY(-40px) rotate(-3deg);
+  }
+  100% {
+    -webkit-transform: translateY(0px) rotate();
+            transform: translateY(0px) rotate();
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+
+@-webkit-keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@-webkit-keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+/*ASDUI.Box*/
+.overlay{height:100%;width:100%;*margin-left:-1px;/*IE7 overlayBug*/padding:0;position:absolute;top:0;left:0;z-index:-1;visibility:hidden;opacity:0;}
+
+/*Box*/
+.ASD_Abox{.sizeBox;border:5px solid #fff;border-radius:2px;-moz-box-shadow:0 0 1px #fff inset;-webkit-box-shadow:0 0 1px #fff inset;box-shadow:0 0 1px #fff inset;background:#fff;box-shadow: -1px 1px 4px #888;-webkit-transition: width 300ms ease, height 300ms ease;transition: width 300ms ease, height 300ms ease;
+  -webkit-backface-visibility:hidden;-webkit-transform-style: preserve-3d;
+  &.ZUIlock:after{content: ' ';position: absolute;z-index: 100;top:-5px;left:-5px;padding:5px;width: 100%;height:100%;background: #000;opacity: .7;filter:alpha(opacity=70);}
+  &.ZUIlock:before{content: ' ';position: absolute;width:50px;height:50px;z-index: 101;top:0;left:0;right:0;bottom:0;margin:auto;border-radius:5px;background:#fff url(../images/loading/loading.gif);}
+}
+.ASDBox-InBox {position:absolute;z-index:1;top:0;bottom:0;left:0;right:0;border-color:transparent;border-color:rgba(255,255,255,255) !important;border-style:solid;border-width:25px 2px 4px;overflow:hidden;
+background: #fff url(../images/product_bg01.png) right bottom no-repeat;background-size: 85px 65px;
+}
+.ASDBox-b .ASDBox-InBox{border-width:25px 2px 34px;}
+.ASDBox-bh .ASDBox-Buttons{display:none;z-index:-1}
+.ASDBox-InBoxTop{height:24px;position:absolute;z-index:2;top:0;left:0;z-index:10;width:100%;}
+.ASDBox-BoxContent{position:relative;*position:absolute;*left:1px;*right:1px;height:100%;overflow:hidden;}
+.ASDBox-allh .ASDBox-InBox{border-width:2px;.sizeBox;}
+.ASDBox-allh .ASDBox-InBoxTop{display:none;}
+.ASDBox-allhb .ASDBox-InBox{border-width:2px 2px 36px;}
+.ASDBox-allhb .ASDBox-InBoxTop{display:none;}
+
+.ASDBox-Buttons{position:absolute;z-index:2;bottom:4px;left:2px;*left:3px;right:2px;*right:3px;border-top:1px solid transparent;text-align:center;}
+
+.boxtile{position:absolute;left:6px;top:2px;line-height:20px;color:#333;font-weight:700;font-size:14px;}
+.boxtile .icon16{vertical-align:-1px}
+.closebtn{width:32px;height:32px;position:absolute;z-index:10;top:-50px;right:-10px;cursor:pointer;.ani;
+	&:after{.bgicon(32px,32px,'\e888',#fff);}
+  &:before{position:absolute;content: '';width: 1px;background: #fff;height:20px;top:28px;right:15px;}
+}
+//.closebtn:hover,.ASDImgClose:hover,.fancybox-close:hover{.rotate(90deg);}
+
+
+
+.alert,.prompt,.confirm{padding:10px;}
+.flash,.myframe,.myMessage{padding:0;overflow:hidden;position:relative;z-index:1;height:100%;}
+.myhtml,.myAjax{position:relative;height:100%;overflow:auto;}
+.myhtml canvas{margin: 0 auto;display: block;}
+
+.zoomBox {
+	.myhtml{overflow:auto;}
+	&.ASD_Abox,.ASDBox-InBox{border:none;}
+	.ASDBox-InBoxTop{.hide;}
+}	
+
+
+.YFrame{width:100%; height:100%; float:left;}
+
+.ASDloading{background:#fff url(../images/loading/spin.svg) no-repeat;position:absolute;left:50%;top:50%;margin:-25px 0 0 -25px;width:50px;height:50px;line-height:50px;color:#f60;.center;z-index:110;.hide;text-indent: -999em;}
+
+//ASDUI.Dp
+.ASDBox-Dp{border:1px solid #000;font-size:12px;overflow:hidden;-moz-box-shadow:0 0 1px #96c9ed inset;-webkit-box-shadow:0 0 1px #96c9ed inset;box-shadow:0 0 1px #96c9ed inset;background:none;display:none;}
+.dp_cal{background: #f2f2f2;padding:5px;overflow:hidden;
+//	select{height:20px;line-height:20px;border:1px solid #ccc;margin: 2px 3px;font-size: 12px;
+//		option{padding: 1px 3px;}
+//	}
+	table{width: 100%;border-collapse: collapse;border-spacing: 0;border:1px solid #000;background:#fff;
+		th,td{.center;font-size:12px;height:24px;line-height:24px;}
+		th{background:#F2FAFF;border:1px solid #000;border-width:1px 0;.blod;}
+		td{cursor: pointer;.sizeBox;
+			&.dp_roll{background:#f5f5f5;}
+			&.dp_empty{background:#fafafa;cursor: default;}
+			&.dp_today{background:#555;color:#fff;}
+			&.dp_selected{background:#cfa972;color:#fff;}
+			&.dpholiy{background:#c00;color:#fff;}
+			
+		}
+		thead{
+			th{background: #fafafa;.pd5;
+        .dropdown+.dropdown{margin-left: 5px}
+      }
+		}
+		tbody{
+			th{background: #000;color:#fff;}
+		}	
+		tfoot {
+			td{border-top:1px solid #BBE1F1;background:#ffd;}
+		}	
+	}
+	.dp_hide{visibility: hidden;}
+}
